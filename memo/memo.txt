@@ -45,8 +45,25 @@
         ⏩   nodemon은 서버의 변동사항을 감지해서 자동으로 서버를 재시작 해준다. 
         ⏩   babeljs 홈페이지 > Setup > nodemon > 2번 복붙 > package.json > npm i nodemon --save-dev > package.json > "scripts" : { "dev" : "nodemon --exec babel-node index.js" } 
     
-    2.  index.js 수정
-        ⏩   import express from "express"
-            ➕  서버 임포트
+    
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#3.0
+    1.  src 폴더 생성
+        ⏩   코드와 로직을 가지고 있는 파일들을 넣는다.
+    
+    2.  package.json 수정
+        ⏩   "scripts": { "dev": "nodemon --exec babel-node src/server.js" }
+            ➕  index.js ➡ server.js 파일명 변경 및 경로 변경 
+    
+    3.  server.js 수정
+        ⏩   import express from "express"
+            ➕  서버 임포트
+        ⏩   const app = express();
+            ➕  서버 선언
+        ⏩   app.listen(PORT, handleListening);
+            ➕  서버에 PORT번호를 부여한다
+        ⏩   const handleListening = () => {}
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞
