@@ -1,0 +1,10 @@
+#2.0
+    1.  package.json 생성
+        ⏩   터미널에 npm init 입력하면 자동으로 생성nodeJS 프로젝트
+        ⏩   package.json은 nodeJS 프로젝트
+        ⏩   JSON = 프로그래머가 파일에 정보를 저장하기 위해 만든 방식 중 하나 (보통 객체를 생각하면 됌)
+            ➕  package.json의 내부는 JSON 방식으로 작성되어 있음
+
+    2.  index.js생성 
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
