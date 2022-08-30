@@ -33,3 +33,9 @@
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 
+#2.3
+    1.  babel 설치 방법
+        ⏩   babel은 최신식 JS문법을 구식 JS문법으로 변환시켜 nodeJS 가 이해 할 수 있도록 해줌 
+        ⏩   babeljs 홈페이지 > Setup > node선택 > 2번 복붙 > babel.config.json 생성 > 4번-shell 복붙 > 4번-JSON을 babel.config.json에 복붙
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞
