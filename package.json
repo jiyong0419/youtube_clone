@@ -7,10 +7,16 @@
     "type": "git",
     "url": "git+https://github.com/jiyong0419/youtube_clone.git"
   },
+  "scripts": {
+    "dev": "node index.js"
+  },
   "author": "Jiyong",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jiyong0419/youtube_clone/issues"
   },
-  "homepage": "https://github.com/jiyong0419/youtube_clone#readme"
+  "homepage": "https://github.com/jiyong0419/youtube_clone#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }

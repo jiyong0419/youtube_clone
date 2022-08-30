@@ -8,3 +8,18 @@
     2.  index.js생성 
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#2.1
+    1.  express 설치
+        ⏩   npm i express
+            ➕  node_modules 폴더 생김
+                👉🏻  npm으로 설치한 모든 패키지가 저장
+            ➕  packge-lock.json 파일 생성
+
+    2.  package.json 수정
+        ⏩   "scripts" : { "server" : "node index.js" }
+            ➕  터미널에 npm run dev 입력하면 index.js가 실행된다.
+        ⏩   "dependencies" : { "express" :  "^4.18.1" }
+            ➕  express가 설치되면서 자동으로 추가 된다.
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞
