@@ -14,7 +14,7 @@
         ⏩   npm i express
             ➕  node_modules 폴더 생김
                 👉🏻  npm으로 설치한 모든 패키지가 저장
-            ➕  packge-lock.json 파일 생성
+            ➕  packge-lock.json 생성
 
     2.  package.json 수정
         ⏩   "scripts" : { "server" : "node index.js" }
@@ -23,3 +23,13 @@
             ➕  express가 설치되면서 자동으로 추가 된다.
 
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞
+
+#2.2
+    1.  .gitignore 생성
+        ⏩   /node_modules
+
+    2.  npm i 
+        ⏩   npm이 package.json의 "dependencies"를 보고 필요한 것들을 모두 설치해준다.
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
