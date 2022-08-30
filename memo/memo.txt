@@ -35,7 +35,18 @@
 
 #2.3
     1.  babel 설치 방법
-        ⏩   babel은 최신식 JS문법을 구식 JS문법으로 변환시켜 nodeJS 가 이해 할 수 있도록 해줌 
+        ⏩   babel은 최신식 JS문법을 구식 JS문법으로 변환시켜 nodeJS 가 이해 할 수 있도록 해준다.
         ⏩   babeljs 홈페이지 > Setup > node선택 > 2번 복붙 > babel.config.json 생성 > 4번-shell 복붙 > 4번-JSON을 babel.config.json에 복붙
 
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞
+
+#2.4
+    1.  nodemon 설치 방법
+        ⏩   nodemon은 서버의 변동사항을 감지해서 자동으로 서버를 재시작 해준다. 
+        ⏩   babeljs 홈페이지 > Setup > nodemon > 2번 복붙 > package.json > npm i nodemon --save-dev > package.json > "scripts" : { "dev" : "nodemon --exec babel-node index.js" } 
+    
+    2.  index.js 수정
+        ⏩   import express from "express"
+            ➕  서버 임포트
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
