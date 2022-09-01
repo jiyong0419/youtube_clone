@@ -81,3 +81,17 @@
         ⏩   const handleHome = () => console.log("Somebody is trying to go home.");
 
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞
+
+#3.3
+    1.  서버중단 하는법
+        ⏩   ctrl + c
+
+    2.  controller에는 express가 부여한 req,res object가 있다.
+        ⏩   console.log(req/res)
+
+    2.  server.js 수정  
+        ⏩   return res.send("I still love you.");
+            ➕  res.send()는 ()안의 text를 화면에 출력하고 request를 끝낸다.
+            ➕  res.end()는 request를 끝낸다.
+    
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
