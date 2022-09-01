@@ -72,3 +72,12 @@
     1.  GET은 HTTP method중 하나다.
  
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#3.2
+    1.  server.js 수정
+        ⏩   app.get("/",handleHome)
+            ➕  get(route,controller)
+            ➕  브라우저가 서버에 "/" 경로로 GET요청을 보내면 handleHome 함수가 실행된다.
+        ⏩   const handleHome = () => console.log("Somebody is trying to go home.");
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞
