@@ -118,3 +118,22 @@
                 👉🏻  middleware에 next()를 써야 다음 controller로 넘어간다.
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#3.6
+    1.  globalMiddleware(app.use) 설명
+        ⏩   app.use(middleware)
+            ➕  app.use(middleware)는 globalMiddleware를 만들 수 있게 해준다.
+            ➕  app.use(middleware)는 app.get()보다 먼저 와야 한다.
+            ➕  app에 들어오는 모든 요청은 app.use(middleware)를 거쳐 진행된다.
+            ➕  app.use(middleware)로 특정 url의 요청은 거부할 수도 있다.
+    
+    2.  server.js 수정
+        ⏩   const logger = (req, res, next) => {}
+            ➕  console.log(`${req.method} ${req.url}`);
+                👉🏻  req.method 는 요청된 method가 GET인지 POST인지 확인 할 수 있다.
+        ⏩   const protectedMiddleware = (req, res, next) => {}
+            ➕  if문을 써서 특정 url의 요청을 거부함
+        ⏩   app.use(protectedMiddleware);
+        ⏩   app.get("/", logger, handleHome);
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
