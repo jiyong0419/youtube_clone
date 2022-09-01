@@ -67,3 +67,8 @@
         ⏩   const handleListening = () => {}
 
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞
+
+#3.1    
+    1.  GET은 HTTP method중 하나다.
+ 
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
