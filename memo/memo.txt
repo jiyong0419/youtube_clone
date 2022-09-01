@@ -102,3 +102,19 @@
 #3.4
     1.  http://expressjs.com/en/5x/api.html#express
         ⏩   express document
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
+
+#3.5    
+    1.  middleware 설명
+        ⏩   request이후 response이전의 소프트웨어
+        ⏩   middleware에는 express가 next argument를 부여해준다
+    
+    2.  server.js 수정
+        ⏩   const gossipMiddleware = (req, res, next) => {}
+            ➕  console.log(`Someone is going to: ${req.url}`);
+                👉🏻  req.url 은 어떤 url로 요청되었는지 확인 할 수 있다.
+            ➕  next();
+                👉🏻  middleware에 next()를 써야 다음 controller로 넘어간다.
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
