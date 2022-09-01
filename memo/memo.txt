@@ -89,9 +89,16 @@
     2.  controller에는 express가 부여한 req,res object가 있다.
         ⏩   console.log(req/res)
 
-    2.  server.js 수정  
+    3.  server.js 수정  
         ⏩   return res.send("I still love you.");
             ➕  res.send()는 ()안의 text를 화면에 출력하고 request를 끝낸다.
             ➕  res.end()는 request를 끝낸다.
+
+    4.  페이지를 만드는 순서 
+        ⏩   서버에 route를 지정해주고, controller를 부여한뒤 controller를 작성
     
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#3.4
+    1.  http://expressjs.com/en/5x/api.html#express
+        ⏩   express document
