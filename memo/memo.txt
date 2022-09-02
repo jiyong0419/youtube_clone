@@ -137,3 +137,13 @@
         ⏩   app.get("/", logger, handleHome);
 
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
+
+#3.7
+    1.  package.json 설명
+        ⏩   package.json은 node.js 관련 정보를 담는 방법
+        ⏩   scripts에 "key"와 "value"를 적으면 npm run key로 value를 실행할수있다.
+        ⏩   dependencies는 프로젝트가 돌아가기위해 필요한 파일들 (node_modules폴더에 저장된다)
+        ⏩   dependencies가 작성된 상태에서 npm i 하면 npm이 알아서 필요한 파일들을 설치해준다
+        ⏩   nodemon은 파일이 수정되고 저장될때마다 서버를 재시작해주는 툴이다
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
