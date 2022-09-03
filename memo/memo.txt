@@ -267,12 +267,42 @@
                 👉🏻  videoRouter.get("/watch", handleWatchVideo);
                 👉🏻  handleWatchVideo controller 작성
                 👉🏻  export default videoRouter;
-    그리고 각각의 js파일에는 express를 개별적으로 import해주어야함 (js는 독립된 파일이기 때문)
-    각각의 router파일에서 router변수를 export default해주고 server.js에서 import해준다
+                    ➡  export default globalRouter는 누군가 globalRouter.js를 임포트하면 globalRouter자체를 임포트하는것이다
 
-    export default globalRouter는 누군가 globalRouter.js를 임포트하면 globalRouter자체를 임포트하는것이다
-    import globalRouter from "./routers/globalRouter"
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
 
+#4.3
+    1.  export와 export default의 차이
+        ⏩   export는 JS파일 내에서 여러 변수에 적용시킬 수 있다.
+            ➕  export default는 JS파일 내에서 하나의 변수만 적용시킬 수 있다.
+        ⏩   export는 import 되었을 때 변수명을 일치 시켜야 한다.
+            ➕  export default는 import 되었을 때 변수명을 일치 시키지 않아도 된다.
+
+    2.  src폴더안에 controllers폴더 생성
+        ⏩   userController.js 생성
+            👉🏻  export const join = (req, res) => { res.send("JOIN"); }
+            👉🏻  export const edit = (req, res) => { res.send("Edit User"); }
+            👉🏻  export const remove = (req, res) => { res.send("Remove User"); }
+        ⏩   videoController.js 생성
+            👉🏻  export const trending = (req, res) => { res.send("HOME"); }
+            👉🏻  export const watch = (req, res) => { res.send("Watch Video"); }
+            👉🏻  export const edit = (req, res) => { res.send("Edit Video"); }
+
+    3.  globalRouter.js 수정
+        ⏩   import { join } from "../controllers/userController";
+        ⏩   import { trending } from "../controllers/videoController";
+        ⏩   globalRouter.get("/", trending);
+        ⏩   globalRouter.get("/join", join);
+
+    4.  userRouter.js 수정
+        ⏩   import { edit, remove } from "../controllers/userController";
+        ⏩   userRouter.get("/edit", edit);
+        ⏩   userRouter.get("/delete", remove);
+
+    5.  videoRouter.js 수정
+        ⏩   import { edit, watch } from "../controllers/videoController";
+        ⏩   videoRouter.get("/watch", watch);
+        ⏩   videoRouter.get("/edit", edit);
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 
@@ -327,3 +357,15 @@
 
 17. server.js에서 ---Router들 import
     ⏩   import ---Router from "./routers/---Router";
+
+18. src 폴더 > controllers폴더 생성 > 각각의 controller.js 생성nodeJS
+
+19. 각각의 controller.js 내부에 controller 작성
+    ⏩   const home = (req,res) => {}
+
+20. 각각의 controller.js 내부에 controller에 export 추가
+    ⏩   export const home = (req,res) => {}
+
+21. 각각의 router.js 내부에 controller를 import
+    ⏩   import { controller, controller2 } from "controller.js 경로"
+
