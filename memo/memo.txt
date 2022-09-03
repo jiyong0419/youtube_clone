@@ -176,3 +176,13 @@
             ➕  const controller = (req,res) => {} 
 
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
+
+#3.9    
+    1.  controller
+        ⏩   controller는 express로부터 req,res 오브젝트를 부여받는다
+            ➕  const controller = (req,res) => {} 
+        ⏩   req는 요청에 대한 정보를 담고있다. 
+        ⏩   controller의 마지막엔 return을 꼭 쓰자
+            ➕  const controller = (req,res) => {return res.end()} 
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
