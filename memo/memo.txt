@@ -145,5 +145,34 @@
         ⏩   dependencies는 프로젝트가 돌아가기위해 필요한 파일들 (node_modules폴더에 저장된다)
         ⏩   dependencies가 작성된 상태에서 npm i 하면 npm이 알아서 필요한 파일들을 설치해준다
         ⏩   nodemon은 파일이 수정되고 저장될때마다 서버를 재시작해주는 툴이다
+    
+    2.  Setup 순서
+        ⏩  첫번째로 npm init을 이용해 package.json을 생성
+        ⏩  두번째로 npm i express
+        ⏩  세번째로 .gitignore 파일 생성 > /node_modules 작성 (그 외 커밋에 제외 할 파일/폴더들 작성)
+        ⏩  네번째로 src폴더생성 > main JS 파일 생성
+        ⏩  다섯번쨰로 바벨 설치
+            ➕  babeljs 홈페이지 > Setup > node > 2번 콘솔에 복붙 > babel.config.json 생성 > 4번-shell 콘솔에 복붙 > 4번-JSON을 babel.config.json에 복붙
+        ⏩  여섯번째로 nodemon 설치
+            ➕  babeljs 홈페이지 > Setup > nodemon > 2번 콘솔에 복붙 > npm i nodemon --save-dev > package.json > "scripts" : { "dev" : "nodemon --exec babel-node index.js" } 
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#3.8
+    1.  서버와 routes
+        ⏩   서버는 항상 켜져있고, 인터넷에 연결되어있고, request를 listening 하고있는 컴퓨터다
+        ⏩   request는 우리가 서버에게 요청하는 것들
+        ⏩   route는 기본url + / , /login , /join , /blahblah 같은 것들을 통칭하는말
+        ⏩   method는 서버에 요청을 어떤방식으로 할지 나타내는 것
+    
+    2.  main JS 작성 순서
+        ⏩   첫번쨰로 express를 import해오고 app 변수에 express()를 담는다
+            ➕  import express from "express"
+        ⏩   두번째로 app에 포트번호를 지정해주고 해당포트번호를 listening 하게 한다
+            ➕  const app = express()
+        ⏩   세번째로 app에 method를 이용하여 route와 controller를 설정해준다
+            ➕  app.get("route",controller)
+        ⏩   네번쨰로 controller내부를 작성해준다
+            ➕  const controller = (req,res) => {} 
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
