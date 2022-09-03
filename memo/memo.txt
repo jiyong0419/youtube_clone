@@ -202,3 +202,57 @@
         ⏩   app.use()는 app.get()보다 위에 있어야 한다.
 
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
+
+#3.11   
+    1.  Morgan middleware
+        ⏩   npm i morgan
+        ⏩   morgan에는 dev,combined,common,short,tiny 등 옵션이 있다
+
+    2.  server.js 수정
+        ⏩   morgan 사용
+            ➕  import morgan from "morgan"
+            ➕  const logger = morgan("dev");
+            ➕  app.use(logger)
+
+
+❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
+여태까지 배운걸 토대로 순서
+
+1.  npm init을 이용해 package.json을 생성
+
+2.  npm i express
+
+3.  .gitignore 파일 생성 > /node_modules 작성 (그 외 커밋에 제외 할 파일/폴더들 작성)
+
+4.   src폴더생성 > main JS 파일 생성
+
+5.  바벨 설치
+    ⏩  babeljs 홈페이지 > Setup > node > 2번 콘솔에 복붙 > babel.config.json 생성 > 4번-shell 콘솔에 복붙 > 4번-JSON을 babel.config.json에 복붙
+
+6.  nodemon 설치
+    ⏩  babeljs 홈페이지 > Setup > nodemon > 2번 콘솔에 복붙 > npm i nodemon --save-dev > package.json > "scripts" : { "dev" : "nodemon --exec babel-node index.js" } 
+
+7.  express를 import해오고 app 변수에 express()를 담는다
+    ⏩  import express from "express"
+    ⏩  const app = express();
+
+8.  app에 포트번호를 지정해주고 해당포트번호를 listening 하게 한다
+    ⏩   app.listen(PORT,handleListening)
+        ➕  const PORT 작성
+        ➕  const handleListening(){} 작성
+
+9.  morgan 설치
+    ⏩   npm i morgan
+
+10. morgan을 import해오고 logger변수에 morgan("dev")을 담는다
+    ⏩   import morgan from "morgan"
+    ⏩   const logger = morgan("dev")
+
+11. app.use로 logger 미들웨어를 지정한다
+    ⏩   app.use(logger)
+
+12. app에 method 이용하여 route와 controller를 설정해준다
+    ⏩  app.get("route",controller)
+
+13. controller내부를 작성해준다
+    ⏩  const controller = (req,res) => {} 
