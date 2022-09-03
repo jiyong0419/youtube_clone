@@ -15,13 +15,32 @@ const protectedMiddleware = (req, res, next) => {
     next();
   }
 };
+
 const handleHome = (req, res) => {
-  return res.send("I love middlewares");
+  res.send("HOME");
 };
+const handleEditUser = (req, res) => {
+  res.send("Edit User");
+};
+const handleWatchVideo = (req, res) => {
+  res.send("Watch Video");
+};
+
+const globalRouter = express.Router();
+const userRouter = express.Router();
+const videoRouter = express.Router();
 
 app.use(logger);
 app.use(protectedMiddleware);
+app.use("/", globalRouter);
+app.use("/users", userRouter);
+app.use("/videos", videoRouter);
+
 app.get("/", handleHome);
+
+globalRouter.get("/", handleHome);
+userRouter.get("/edit", handleEditUser);
+videoRouter.get("/watch", handleWatchVideo);
 
 const handleListening = () => {
   console.log(`✅ Server listening on port http://localhost:${PORT} 🚀`);

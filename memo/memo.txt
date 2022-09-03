@@ -221,6 +221,30 @@
         ⏩   /   /login   /join   /search   ...  /users/edit   /users/delete   ...   /videos/watch   /videos/edit   ...
             ➕  해당 프로젝트에서는 globalRouter와 userRouter, videoRouter가 필요
 
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
+
+#4.1
+    1.  globalRouter는 home에서 바로 갈 수 있는 것들을 지정한다.
+        ⏩   login, join, search 같은 것들
+
+    2.  server.js 수정
+        ⏩   globalRouter 생성
+            ➕  const globalRouter = express.Router();
+            ➕  app.use("/",globalRouter)
+            ➕  globalRouter.get("/",handleHome)
+            ➕  const handleHome = (req,res) => {res.send("HOME")}
+        ⏩   userRouter 생성
+            ➕  const userRouter = express.Router();
+            ➕  app.use("/users",userRouter)
+            ➕  userRouter.get("/edit",handleEditUser)
+            ➕  const handleEditUser = (req,res) => {res.send("Edit User")}
+        ⏩   videoRouter 생성
+            ➕  const videoRouter = express.Router();
+            ➕  app.use("/videos",videoRouter)
+            ➕  videoRouter.get("/watch",handleWatchVideo)
+            ➕  const handleWatchVideo = (req,res) => {res.send("Watch Video")}
+
+
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 
