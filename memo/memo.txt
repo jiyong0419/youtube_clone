@@ -186,3 +186,19 @@
             ➕  const controller = (req,res) => {return res.end()} 
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#3.10
+    1.  middleware
+        ⏩   미들웨어는 request와 response중간에 있는 소프트웨어
+        ⏩   미들웨어는 원하는만큼 작성가능
+            ➕  app.get(route,middleware, middleware2 , ... middleware100 ,controller)
+        ⏩   미들웨어는 express로부터 req,res 오브젝트와 next 함수를 추가로 부여받는다
+        ⏩   next함수는 해당 미들웨어가 실행종료되면 다음 controller로 넘어가게 해주는 역할
+            ➕  const middleware = (req,res,next) => {next()}
+    
+    2.  global middleware
+        ⏩   app.use(middleware)
+        ⏩   app.use(route,middleware)
+        ⏩   app.use()는 app.get()보다 위에 있어야 한다.
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
