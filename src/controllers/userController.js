@@ -9,3 +9,12 @@ export const edit = (req, res) => {
 export const remove = (req, res) => {
   res.send("Remove User");
 };
+export const login = (req, res) => {
+  res.send("Login User");
+};
+export const logout = (req, res) => {
+  res.send("Logout User");
+};
+export const see = (req, res) => {
+  res.send("see User");
+};

@@ -303,6 +303,41 @@
         ⏩   import { edit, watch } from "../controllers/videoController";
         ⏩   videoRouter.get("/watch", watch);
         ⏩   videoRouter.get("/edit", edit);
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#4.6
+    1.  userController.js 수정
+        ⏩   export const login = (req, res) => {}
+        ⏩   export const logout = (req, res) => {}
+        ⏩   export const see = (req, res) => {}
+    
+    2.  videoController.js 수정
+        ⏩   export const see = (req, res) => {}
+        ⏩   export const search = (req, res) => {}
+        ⏩   export const upload = (req, res) => {}
+        ⏩   export const deleteVideo = (req, res) => {}
+
+    3.  globalRouter.js 수정
+        ⏩   import { join, login } from "../controllers/userController"
+        ⏩   import { search, trending } from "../controllers/videoController";
+        ⏩   globalRouter.get("/login", login);
+        ⏩   globalRouter.get("/search", search);
+
+    4.  userRouter.js 수정
+        ⏩   import { edit, logout, remove, see } from "../controllers/userController";
+        ⏩   userRouter.get("/logout", logout);
+        ⏩   userRouter.get("/:id", see);
+    
+    5.  videoRouter.js 수정
+        ⏩   import { see } from "../controllers/userController";
+        ⏩   import { deleteVideo, edit, upload } from "../controllers/videoController";
+        ⏩   videoRouter.get("/upload", upload);
+        ⏩   videoRouter.get("/:id", see);
+        ⏩   videoRouter.get("/:id/edit", edit);
+        ⏩   videoRouter.get("/:id/delete", deleteVideo);
+
+        
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 
@@ -348,9 +383,8 @@
     ⏩   import express = "express";
     ⏩   const ---Router = express();
 
-15. 각각의 router.js 내부에 route와 controller 선언
+15. 각각의 router.js 내부에 route와 controller 부여
     ⏩  ---Router.get("route",controller)
-    ⏩  const controller = (req,res) => { --- }
 
 16. 각각의 router.js 내부에 router변수를 export default
     ⏩  export default ---Router
