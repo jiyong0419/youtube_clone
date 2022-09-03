@@ -244,6 +244,34 @@
             ➕  videoRouter.get("/watch",handleWatchVideo)
             ➕  const handleWatchVideo = (req,res) => {res.send("Watch Video")}
 
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#4.2
+    1.  코드 정리
+        ⏩   src폴더안에 routers폴더 생성
+            ➕  globalRouter.js 생성
+                👉🏻  import express from "express"
+                👉🏻  const globalRouter = express.Router();
+                👉🏻  globalRouter.get("/", handleHome);
+                👉🏻  handleHome controller 작성
+                👉🏻  export default globalRouter;
+            ➕  userRouter.js 생성
+                👉🏻  import express from "express"
+                👉🏻  const userRouter = express.Router();
+                👉🏻  userRouter.get("/edit", handleEditUser);
+                👉🏻  handleEditUser controller 작성
+                👉🏻  export default userRouter;
+            ➕  videoRouter.js 생성
+                👉🏻  import express from "express"
+                👉🏻  const videoRouter = express.Router();
+                👉🏻  videoRouter.get("/watch", handleWatchVideo);
+                👉🏻  handleWatchVideo controller 작성
+                👉🏻  export default videoRouter;
+    그리고 각각의 js파일에는 express를 개별적으로 import해주어야함 (js는 독립된 파일이기 때문)
+    각각의 router파일에서 router변수를 export default해주고 server.js에서 import해준다
+
+    export default globalRouter는 누군가 globalRouter.js를 임포트하면 globalRouter자체를 임포트하는것이다
+    import globalRouter from "./routers/globalRouter"
 
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
@@ -284,8 +312,18 @@
 12. README.md 파일에 라우터들을 정리해준다
     ⏩   /   /login  /users/:id  /users/:id/edit   /videos/:id   /videos/upload ...
 
-12. app에 method 이용하여 route와 controller를 설정해준다
-    ⏩  app.get("route",controller)
+13. src 폴더 > routers폴더 생성 > 각각의 router.js 생성
 
-13. controller내부를 작성해준다
-    ⏩  const controller = (req,res) => {} 
+14. 각각의 router.js 내부에 express import와 router선언
+    ⏩   import express = "express";
+    ⏩   const ---Router = express();
+
+15. 각각의 router.js 내부에 route와 controller 선언
+    ⏩  ---Router.get("route",controller)
+    ⏩  const controller = (req,res) => { --- }
+
+16. 각각의 router.js 내부에 router변수를 export default
+    ⏩  export default ---Router
+
+17. server.js에서 ---Router들 import
+    ⏩   import ---Router from "./routers/---Router";
