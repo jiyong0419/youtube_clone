@@ -420,6 +420,53 @@
         ⏩   export const see = (req, res) => {
             👉🏻  res.render("watch")
 
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
+
+#5.3
+    1. block 명령어
+        ⏩   pug에서 block은 빈공간을 만들어준다.
+            👉🏻  다른 템플릿에서 block에 의해 생긴 빈공간을 채울 수 있다.
+    
+    2. extends 명령어
+        ⏩   pug에서 extends는 다른 템플릿을 불러와준다. (확장시킬 템플릿)
+
+    2.  base.pug 생성
+        ⏩  doctype html 
+            html(lang="ko")
+                head    
+                    block title
+                body 
+                    block content
+                include partials/footer.pug
+            👉🏻  block content는 해당위치에 content라는 block을 만든것
+
+    3.  home.pug 수정
+        ⏩  extends base.pug
+            block title
+                title Youtbe | Home
+            block content 
+                h1 Home!
+            👉🏻  extends base.pug는 base.pug를 불러와서 확장시킨다는 뜻
+            👉🏻  block title 한줄아래 들여쓰기로 block을 채울 HTML 태그 작성
+    
+    4.  watch.pug 수정
+        ⏩  extends base.pug
+            block title 
+                title Youtbe | Watch Video
+            block content 
+                h1 Watch Video!
+
+    5.  edit.pug 생성
+        ⏩  extends base.pug
+            block title
+                title Youtbe | Edit Video
+            block content 
+                h1 Edit Video!
+
+    6.  videoController.js 수정
+        ⏩   export const edit = (req, res) => {
+            👉🏻  res.render("edit")
+
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 

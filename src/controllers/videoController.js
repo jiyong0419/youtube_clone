@@ -7,7 +7,7 @@ export const see = (req, res) => {
 };
 
 export const edit = (req, res) => {
-  res.send("Edit Video");
+  res.render("edit");
 };
 export const search = (req, res) => {
   res.send("Search Video");
