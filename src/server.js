@@ -18,7 +18,8 @@ const protectedMiddleware = (req, res, next) => {
     next();
   }
 };
-
+app.set("view engine", "pug");
+app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(protectedMiddleware);
 app.use("/", globalRouter);

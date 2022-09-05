@@ -360,6 +360,37 @@
     3.  userRouter.js 수정
         ⏩   userRouter.get("/:id(\\d+)", see);
         
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
+
+#5.1
+    1.  Pug 
+        ⏩   npm i pug
+        ⏩   pug는 tag를 열고 닫지 않고 들여쓰기로 해결한다.
+        ⏩   pug템플릿은 views폴더 안에 작성되어야한다.
+        ⏩   pug템플릿을 적용하려면 app.set을 이용하여 view와 view engine을 셋팅 해주어야 한다
+    
+    2.  server.js 수정
+        ⏩   app.set("view engine", "pug")
+            👉🏻  view engine을 pug로 셋팅
+        ⏩   app.set("views", process.cwd() + "/src/views")
+            👉🏻  views는 views폴더의 위치를 셋팅해준다.
+            👉🏻  process.cwd()는 package-json의 위치
+    
+    3.  videoController.js 수정
+        ⏩   export const trending = (req, res) => {
+            👉🏻  res.render("home")
+                ➕  express가 알아서 home.pug를 렌더링 해준다
+
+    4.  views폴더 생성
+        ⏩   home.pug 생성
+            👉🏻  doctype html 
+                html(lang="ko")
+                head    
+                title Youtube
+                body 
+                    h1 Welcome to Youtube 
+                    footer &copy; 2022 Youtube
+
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 
@@ -424,4 +455,13 @@
 
 21. 각각의 router.js 내부에 controller를 import
     ⏩   import { controller, controller2 } from "controller.js 경로"
+
+22. put 템플릿 설치
+    ⏩   npm i pug
+
+23. src폴더 > views 폴더 생성 > base.pug 생성
+
+24. main JS에서 view,view engine 셋팅
+    ⏩   app.set("view","pug")
+    ⏩   app.set("view engine", process.cwd()+"/src/views")
 
