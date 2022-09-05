@@ -3,7 +3,7 @@ export const trending = (req, res) => {
 };
 
 export const see = (req, res) => {
-  res.send("Watch Video");
+  res.render("watch");
 };
 
 export const edit = (req, res) => {

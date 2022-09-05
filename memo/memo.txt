@@ -391,6 +391,35 @@
                     h1 Welcome to Youtube 
                     footer &copy; 2022 Youtube
 
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#5.2
+    1.  pug에서 JS 변수 사용하는법 
+        ⏩   #{} 사용 
+
+    2.  partials폴더 생성
+        ⏩   partials폴더는 pug에서 반복되는 구문을 작성한다.
+        ⏩   footer.pug 생성
+            👉🏻  footer &copy; #{new Date().getFullYear()} Youtube
+                ➕  #{}를 이용하여 JS변수를 사용
+
+    3.  home.pug 수정
+        ⏩   include partials/footer.pug
+            👉🏻  include 명령어는 다른 pug 템플릿을 불러올 때 사용한다.
+    
+    4.  watch.pug 생성
+        ⏩  doctype html 
+            html(lang="ko")
+                head    
+                    title Youtube
+                body 
+                    h1 Watch Video! 
+                    include partials/footer.pug
+    
+    5.  videoController.js 수정
+        ⏩   export const see = (req, res) => {
+            👉🏻  res.render("watch")
+
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 
