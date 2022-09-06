@@ -614,6 +614,25 @@
         ⏩   input(name="title",...)
             👉🏻  form을 post로 전송할 땐, form 안의 input에 name을 지정해주자
 
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#6.3
+    1.  videoRouter.js 수정
+        ⏩   videoRouter.route("/:id(\\d+)/edit").get(getEdit).post(postEdit);
+            👉🏻  app.get과 app.post의 route가 동일하면 app.route를 이용하여 한줄로 작성할 수 있다.
+
+    2.  server.js 수정
+        ⏩   app.use(express.urlencoded({ extended: true }));
+            👉🏻  post된 form을 post controller에서 req.body로 받아오려면 위 작업을 해주어야한다
+
+    3.  videoController.js 수정
+        ⏩   export const postEdit = (req, res) => {
+            👉🏻  const { title } = req.body;
+                ➕  req.body는 post로 전송된 form의 정보를 받아온다
+            👉🏻  res.redirect(`/videos/${id}`);
+                ➕  redirect(url)은 브라우저를 url로 이동시켜준다.
+                ➕  res.render(template)는 template를 html로 변환하여 렌더링시켜 반환해준다.
+
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 
@@ -687,4 +706,12 @@
 24. main JS에서 view,view engine 셋팅
     ⏩   app.set("view","pug")
     ⏩   app.set("view engine", process.cwd()+"/src/views")
+
+25. views폴더에 필요한 pug들 생성
+    ⏩   mixins폴더와 partials폴더 생성
+
+26. router에 app.post를 이용하여 post router도 추가
+
+27. router에 app.get과 app.post가 같은 url을 사용하는게 있다면 app.route로 합쳐주자
+
 
