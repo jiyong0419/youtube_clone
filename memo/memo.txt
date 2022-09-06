@@ -578,6 +578,22 @@
     
     3.  백엔드에 데이터보내는법 app.post(route,controller)
 
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#6.1
+    1.  videoController.js 수정
+        ⏩   export const watch = (req, res) => {}
+    
+    2.  watch.pug 수정
+        ⏩   h3 #{video.views} #{video.views < 2 ? "view" : "views"}
+            👉🏻  video.views < 2 ? "view" : "views" 는 삼항연산자를 이용하여 video.views가 복수인지 단수인지 구별해낸다
+        ⏩    a(href=`${video.id}/edit`) Edit Video &rarr;
+            👉🏻  url은 2가지 종류가 있다 
+                ➕  absolute url = a(href="/url")
+                    ➡  루트 url부터 바뀐다 localhost:4000/videos/watch >> localhost:4000/url
+                ➕  relative url = a(href="url")
+                    ➡  끝의 url만 바뀐다 localhost:4000/videos/watch >> localhost:4000/videos/upload
+    absolute url 
 
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
