@@ -593,7 +593,26 @@
                     ➡  루트 url부터 바뀐다 localhost:4000/videos/watch >> localhost:4000/url
                 ➕  relative url = a(href="url")
                     ➡  끝의 url만 바뀐다 localhost:4000/videos/watch >> localhost:4000/videos/upload
-    absolute url 
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞        
+
+#6.2    
+    1.  videoController.js 수정
+        ⏩   export const trending = (req, res) => {}
+        ⏩   export const watch = (req, res) => {}
+        ⏩   export const getEdit = (req, res) => {}
+        ⏩   export const postEdit = (req, res) => {};
+
+    2.  videoRouter.js 수정
+        ⏩   videoRouter.post("/:id(\\d+)/edit", postEdit);
+            👉🏻  post는 해당 route에서 post 가 전송되었을 때 실행된다.
+        
+    3.  edit.pug 수정
+        ⏩   form(method="post") 
+            👉🏻  form을 post방식으로 전송한다 (기본값 = get)
+            👉🏻  form(action="")은 form이 전송 될 url을 적는다 (전송 될 url이 현재 위치하고 있는 url이랑 같다면 생략가능)
+        ⏩   input(name="title",...)
+            👉🏻  form을 post로 전송할 땐, form 안의 input에 name을 지정해주자
 
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
