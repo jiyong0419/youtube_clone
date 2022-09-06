@@ -538,6 +538,31 @@
             else 
                 li Sorry nothing found.
             👉🏻  each in else 사용 예제
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#5.9
+    1.  Mixin은 partial인데 데이터를 받을수 있는 partial
+
+    2.  videoController.js 수정
+        ⏩   const videos = [{}]
+    
+    3.  mixins 폴더 생성
+        ⏩   video.pug 생성  
+            👉🏻  mixin video(video)
+                    div     
+                        h4=video.title
+                        ul 
+                            li #{video.rating}/5 ...
+                ➕  mixin vidoe(video)는 해당 템플릿을 mixin템플릿으로 선언
+
+    4.  home.pug 수정
+        ⏩   include mixins/video
+            👉🏻  mixin템플릿을 include함으로써 임포트 같은 것이다
+        ⏩   each video in videos
+                +video(video)
+            👉🏻  mixin템플릿을 사용할땐 +mixin(variable) 이런식으로 사용한다
+    
  
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
@@ -604,7 +629,7 @@
 21. 각각의 router.js 내부에 controller를 import
     ⏩   import { controller, controller2 } from "controller.js 경로"
 
-22. put 템플릿 설치
+22. pug 템플릿 설치
     ⏩   npm i pug
 
 23. src폴더 > views 폴더 생성 > base.pug 생성
