@@ -633,6 +633,29 @@
                 ➕  redirect(url)은 브라우저를 url로 이동시켜준다.
                 ➕  res.render(template)는 template를 html로 변환하여 렌더링시켜 반환해준다.
 
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞    
+
+#6.5
+    1.  videoController.js 수정
+        ⏩   export const getUpload = (req, res) => {
+        ⏩   export const postUpload = (req, res) => {
+
+    2.  videoRouter.js 수정
+        ⏩   videoRouter.route("/upload").get(getUpload).post(postUpload);
+
+    3.  base.pug 수정
+        ⏩  nav
+                ul 
+                    li 
+                        a(href="/videos/upload") Upload Video
+
+    4.  upload.pug 생성
+        ⏩  extends base
+                block content   
+                    h3 hello from upload
+                    form(method="post")
+                        input(name="title",placeholder="Title",required)
+                        input(type="submit",value="Upload Video")
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 
