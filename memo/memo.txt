@@ -673,6 +673,34 @@
         ⏩   mongo DB 설치 
             👉🏻  https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
 
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#6.8
+    1.  Mongo DB 설치 확인
+        ⏩   powershell > mongod > mongo > `connecting to: mongodb:url.....` 메시지가 콘솔에 있음
+    
+    2.  Mongoose
+        ⏩   node.js와 mongoDB를 이어주는 package
+        ⏩   npm i mongoose
+    
+    3.  db.js 생성
+        ⏩   import mongoose from "mongoose";
+            👉🏻  mongoose 임포트
+        ⏩   mongoose.connect("mongodb://127.0.0.1:27017/youtube_clone");
+            👉🏻  해당 url을 우리의 db로 지정한다
+        ⏩   const db = mongoose.connection;
+            👉🏻  연결된 db의 정보를 db변수에 담는다
+        ⏩   const handleOpen = () => console.log("✅ Connected to DB");
+        ⏩   const handleError = (error) => console.log("❌ DB Error ", error);
+        ⏩   db.on("error", (error) => console.log("DB Error ", error));
+            👉🏻  on()은 콜백함수를 계속 연결한 상태를 유지 
+        ⏩   db.once("open", handleOpen);
+            👉🏻  once()는 콜백함수를 한번만 연결 후 제거
+            
+    4.  server.js 수정
+        ⏩   import "./db";
+            👉🏻  db.js를 통째로 임포트
+
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 
