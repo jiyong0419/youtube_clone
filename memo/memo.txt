@@ -664,7 +664,15 @@
         ⏩   export const postUpload = (req, res) => {
             👉🏻  videos.push(newVideo)
                 ➕  array.push(data)는 data를 array의 마지막요소로 추가한다.
-                
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
+
+#6.7
+    1.  Mongo DB
+        ⏩   문서를 기반으로 하는 DB (JSON형식), 다른 DB는 엑셀처럼 열과 행으로 이루어져 있음
+        ⏩   mongo DB 설치 
+            👉🏻  https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
+
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까지 배운걸 토대로 순서
 
