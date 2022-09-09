@@ -708,6 +708,25 @@
         ⏩   Video.js 생성
             👉🏻  Video model을 정의할 것이다.
 
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#6.10   
+    1.  models폴더 생성
+        ⏩   Video.js 생성
+            👉🏻  import mongoose from "mongoose";
+            👉🏻  const videoSchema = new mongoose.Schema({
+                ➕  title: String,
+                     description: String,
+                     createdAt: Date,
+                     hashtags: [{ type: String }],
+                     meta: {
+                       views: Number,
+                       rating: Number,
+                       },
+                ➕  videoSchema에 우리의 데이터 타입들을 정의해놓는다.
+            👉🏻  const Video = mongoose.model("Video", videoSchema);
+            👉🏻  export default Video;
+
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
