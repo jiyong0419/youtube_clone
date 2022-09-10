@@ -799,6 +799,25 @@
                 ➕  await Video.create()를 이용하여 video객체를 만듦과 동시에 db에 save할수 있다.
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#6.17
+    1.  videoController.js 수정
+        ⏩   export const postUpload = async (req, res) => {
+            👉🏻  try{
+
+                } catch(error){
+                    return res.render("upload", { pageTitle: "Upload Video", errorMessage: error._message });
+                }
+                ➕  catch문에서 console.log(error)를 하면 error를 조회할수있다.
+    
+    2.  Video.js 수정
+        ⏩   const videoSchema = new mongoose.Schema({
+            👉🏻  createdAt: { type: Date, required: true, default: Date.now },
+                ➕  required:true는 해당 프로퍼티를 required로 설정해줌
+                ➕  default: Date.now는 해당 프로퍼티의 기본값을 설정해줌
+                ➕  default가 있으면 required는 없어도됌
+                
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
