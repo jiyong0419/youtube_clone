@@ -1,12 +1,14 @@
 "use strict";
 import Video from "../models/Video";
 
-export const home = (req, res) => {
-  Video.find({}, (err, videos) => {
-    console.log(err);
+export const home = async (req, res) => {
+  try {
+    const videos = await Video.find({});
     console.log(videos);
-  });
-  return res.render("home", { pageTitle: "Home", videos: [] });
+    return res.render("home", { pageTitle: "Home", videos });
+  } catch {
+    res.render("error");
+  }
 };
 
 export const watch = (req, res) => {

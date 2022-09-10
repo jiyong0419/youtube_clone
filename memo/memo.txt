@@ -749,6 +749,24 @@
                 ➕  Video.find() 같이 db에 요청을 하는 구문은 db로부터 응답받는 시간이 걸린다.
                     db로 부터 응답을 받으면 콜백함수가 실행된다.
 
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
+
+#6.13
+    1.  videoController.js 수정
+        ⏩   export const home = async (req, res) => {
+            👉🏻  try{
+                    const videos = await Video.find({});
+                    return res.render("home", { pageTitle: "Home", videos });
+                } catch {
+                    res.render("error");
+                }
+                ➕  Video.find() 같이 db에 요청을 하는 구문은 db로부터 응답받는 시간이 걸린다.
+                    async + await 는 db로부터 응답을 기다려주고, 응답받은후 다음 코드를 계속 이어나간다.
+                ➕  await는 함수 내에서만 실행가능하고, 그함수는 async여야 한다.
+                ➕  try catch문을 사용하여 에러검출을 한다.
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
@@ -839,5 +857,7 @@
 
 31. init.js를 따로만들어 sever.js에는 sever의 설정과 관련된것만 남기고 나머지는 init.js로 옮겨줌
     ⏩   package.json에서 script를 server.js에서 init.js로 변경해주어야함
+
+32. controller에 Video model을 적용시키고 Video model (db)에 접근할땐 async await 잘 써주자
 
 
