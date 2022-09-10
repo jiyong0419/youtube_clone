@@ -739,6 +739,15 @@
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 
+#6.12
+    1.  videoController.js 수정
+        ⏩   export const home = (req, res) => {
+            👉🏻  Video.find({}, (err, videos) => {
+                  console.log(err);
+                  console.log(videos);
+                });
+                ➕  Video.find() 같이 db에 요청을 하는 구문은 db로부터 응답받는 시간이 걸린다.
+                    db로 부터 응답을 받으면 콜백함수가 실행된다.
 
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
