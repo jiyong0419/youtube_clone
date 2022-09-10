@@ -766,6 +766,26 @@
                 ➕  try catch문을 사용하여 에러검출을 한다.
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#6.15
+    1.  videoController.js 수정
+        ⏩   export const postUpload = (req, res) => {
+            👉🏻  const { title, description, hashtags } = req.body;
+                const video = new Video({
+                    createdAt: Date.now(),
+                    hashtags: hashtags.split(",").map((word) => `#${word}`),
+                  });
+                ➕  Date.now()는 현재 시간을 알려준다
+                ➕  String.split(",")는 String을 ,로 구분하여 배열로 return해준다
+                ➕  Array.map((word)=>`#${word}`)는 Array에 담긴 모든요소에 `#$word}`를 적용해줌
+                ➕  Video model로 객체를 생성하면 mongoose에서 id를 부여해준다
+    2.  upload.pug 수정
+        ⏩  input(name="description",placeholder="Description",required)
+            input(name="hashtags",placeholder="Hashtags, seperated by comma.",required)
+    
+    mongoose model을 이용하여 데이터를 생성하면 mongoose는 id를 부여해줌 
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
