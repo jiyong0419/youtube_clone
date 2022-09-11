@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://127.0.0.1:27017/youtube_clone");
+mongoose.connect("mongodb://127.0.0.1:27017/youtube_clone", {
+  //useNewUrlParser: true;
+  //useUnifiedTopology: true;
+  //useFindAndModify: true;
+});
 
 const db = mongoose.connection;
 

@@ -863,8 +863,17 @@
             👉🏻  hashtags: hashtags.split(",").map((word) => (word.startsWith("#") ? word : `#${word}`))
                 ➕  String.startsWith("#")는 String이 #로 시작하는지 확인 후 boolean값을 리턴해준다.
 
-🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#6.23
+    1.  Video.js 수정
+        ⏩   videoSchema.pre("save", async function () {
+            👉🏻  this.hashtags = this.hashtags[0].split(",").map((word) => (word.startsWith("#") ? word : `#${word}`));
+                ➕  schema.pre('save',async function(){})은 schema가 저장되기전에 실행되는 mongoose middleware이다.
+                ➕  schema.pre('save',async function(){})는 function내부에 this를 갖고 , this는 저장될 문서를 의미한다. (console.log(this))
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
