@@ -872,8 +872,20 @@
                 ➕  schema.pre('save',async function(){})은 schema가 저장되기전에 실행되는 mongoose middleware이다.
                 ➕  schema.pre('save',async function(){})는 function내부에 this를 갖고 , this는 저장될 문서를 의미한다. (console.log(this))
 
-🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
+
+#6.24
+    1.  Video.js 수정
+        ⏩   videoSchema.static("formatHashtags", function (hashtags) {
+            👉🏻  schema.static("functionName",function(parameter)){}는 Model.functionName() 함수를 만들어준다
+        
+    2.  videoController.js 수정
+        ⏩   export const postEdit = async (req, res) => {
+            👉🏻  hashtags: Video.formatHashtags(hashtags)
+                ➕  schema에 static함수를 적용
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
