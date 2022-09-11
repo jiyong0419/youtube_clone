@@ -833,10 +833,23 @@
         ⏩   export const watch = async (req, res) => {
             👉🏻  const video = await Video.findById(id);
                 ➕  url parameter id를 이용하여 Video db에서 video를 조회
-        
+    
+    2.  videoRouter.js 수정
         ⏩   videoRouter.get("/:id([0-9a-f]{24})", watch);
             👉🏻  mongoose에 부여받은 16진수 24자리 id에 대한 정규표현식
 
+#6.20
+    1.  videoController.js 수정
+        ⏩   export const watch = async (req, res) => {
+            👉🏻   if (!video) {
+                ➕  controller에서 video db를 불러왔을땐 에러처리부터 먼저 하자
+            
+    2.  404.pug 생성
+
+    3.  edit.pug 수정
+        ⏩   input(name="hashtags",placeholder="Hashtags, seperated by comma.",required,value=video.hashtags.join())
+            👉🏻  array.join()은 array의 요소들을 하나의 string으로 묶어준다
+                ➕  ["a","b","c","d"].join() => "abcd"
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
