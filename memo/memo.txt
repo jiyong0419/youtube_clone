@@ -826,8 +826,20 @@
                 description: { type: String, required: true, maxLength: 140 },
                 ➕  uppercase는 대문자 전환, trim은 양쪽 공백제거 의 기능을 한다. 
 
-🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#6.19
+    1.  videoController.js 수정
+        ⏩   export const watch = async (req, res) => {
+            👉🏻  const video = await Video.findById(id);
+                ➕  url parameter id를 이용하여 Video db에서 video를 조회
+        
+        ⏩   videoRouter.get("/:id([0-9a-f]{24})", watch);
+            👉🏻  mongoose에 부여받은 16진수 24자리 id에 대한 정규표현식
+
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
