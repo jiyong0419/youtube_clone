@@ -851,8 +851,20 @@
             👉🏻  array.join()은 array의 요소들을 하나의 string으로 묶어준다
                 ➕  ["a","b","c","d"].join() => "abcd"
 
-🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
+
+#6.21 ~ #6.22
+    1.  videoController.js 수정
+        ⏩   export const postEdit = async (req, res) => {
+            👉🏻  const video = await Video.exists({ _id: id });
+                ➕  Model.exists({condition}) 는 db에 condition(조건)이 존재하는지 확인후 boolean값을 리턴해준다.
+            👉🏻   await Video.findByIdAndUpdate(id, {
+                ➕  Model.findByIdAndUpdate(id,{})는 id를 이용해 db에서 데이터를 받아오고 {}안의 내용을 업데이트한다.
+            👉🏻  hashtags: hashtags.split(",").map((word) => (word.startsWith("#") ? word : `#${word}`))
+                ➕  String.startsWith("#")는 String이 #로 시작하는지 확인 후 boolean값을 리턴해준다.
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
