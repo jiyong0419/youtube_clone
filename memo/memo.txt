@@ -893,6 +893,25 @@
                 ➕  Model.findByIdAndDelete는 id를 이용하여 db에서 해당id를 가진 데이터를 지워준다.
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#6.26~#6.27
+    1.  videoController.js 수정
+        ⏩   export const search = async (req, res) => {
+            👉🏻  const { keyword } = req.query;
+                if (keyword) {
+                  const videos = await Video.find({
+                    title: {
+                      $regex: new RegExp(keyword, "i"),
+                    },
+                  });
+                  return res.render("search", { pageTitle: "Search", videos });
+                }
+                return res.render("search", { pageTitle: "Search" });
+                ➕  req.query는 get으로 전달된 form을 받아온다
+                ➕  $regex: new RegExp(keyword,"i")는 mongoDB의 regex (정규표현식)이다
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
