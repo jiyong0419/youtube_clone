@@ -884,7 +884,14 @@
             👉🏻  hashtags: Video.formatHashtags(hashtags)
                 ➕  schema에 static함수를 적용
 
-🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞             
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#6.25
+    1.  videoController.js 수정
+        ⏩   export const deleteVideo = async (req, res) => {
+            👉🏻  await Video.findByIdAndDelete(id)
+                ➕  Model.findByIdAndDelete는 id를 이용하여 db에서 해당id를 가진 데이터를 지워준다.
+
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
