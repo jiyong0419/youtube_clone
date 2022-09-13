@@ -937,6 +937,16 @@
         ⏩    return res.status(400).render(
             👉🏻  res.status(400) 은 상태코드를 400으로 보낸다.
 
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#7.5~#7.6
+    1.  userController.js 수정
+        ⏩   import bcrypt from "bcrypt";
+        ⏩   const user = await User.findOne({ username });
+            👉🏻  Model.findOne({condition})은 condition에 일치하는 data를 가져다준다.
+        ⏩   export const postLogin = async (req, res) => {
+            👉🏻  const ok = await bcrypt.compare(password, user.password);
+                ➕ await bcrypt.compare(password, db Password) 는 password가 해싱되면 db에 password랑 일치하는지 확인시켜준다.
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
