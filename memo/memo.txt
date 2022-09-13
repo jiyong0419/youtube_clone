@@ -913,7 +913,7 @@
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 
 #7.0~7.3
-    1.  join.put 생성
+    1.  join.pug 생성
 
     2.  User.js 생성
         ⏩   import bcrypt from "bcrypt";
@@ -929,6 +929,14 @@
         ⏩   export const postJoin = async (req, res) => {
             👉🏻  const exists = await User.exists({ $or: [{ username }, { email }] });
                 ➕  한번에 여러 condition을 조회하고싶을때 $or: [ {condition1}, {condition2} ] => return true / false
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#7.4
+    1.  userController.js , videoController.js 수정
+        ⏩    return res.status(400).render(
+            👉🏻  res.status(400) 은 상태코드를 400으로 보낸다.
+
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
