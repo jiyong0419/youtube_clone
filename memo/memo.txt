@@ -962,6 +962,33 @@
                 })
                 ➕  express-session의 기본 셋팅 (추후설명)
 
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#7.9~#7.10
+    1.  userController.js 수정
+        ⏩    export const postLogin = async (req, res) => {
+            👉🏻  req.session.loggedIn = true;
+                req.session.user = user;
+                ➕  session에 원하는 object를 추가할수있다.
+        
+    2.  middlewares.js 생성
+        ⏩   export const localsMiddleware = (req, res, next) => {
+            👉🏻   res.locals.siteName = "Wetube";
+                  res.locals.loggedIn = Boolean(req.session.loggedIn);
+                  res.locals.loggedInUser = req.session.user;
+                  next();
+                };
+                ➕  res.locals 는 pug템플릿이 참조할수있는 변수를 설정하는 공간이다.
+    
+    3.  server.js 수정
+        ⏩   import { localsMiddleware } from "./middlewares";
+        ⏩   app.use(localsMiddleware);
+            👉🏻  app.use(localsMiddleware)는 라우터바로위에 오는것이 좋다.
+    
+    4.  base.pug 수정
+        ⏩   a(href="/my-profile") #{loggedInUser.name}'s Profile
+            👉🏻  localsMiddleware에 작성한 loggedInUser변수를 pug 템플릿에서 활용
+
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
