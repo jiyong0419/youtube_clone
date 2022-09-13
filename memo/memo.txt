@@ -910,6 +910,26 @@
                 ➕  req.query는 get으로 전달된 form을 받아온다
                 ➕  $regex: new RegExp(keyword,"i")는 mongoDB의 regex (정규표현식)이다
 
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#7.0~7.3
+    1.  join.put 생성
+
+    2.  User.js 생성
+        ⏩   import bcrypt from "bcrypt";
+            👉🏻  bcrypt는 비밀번호 해싱해주는 패키지,  npm i bcrypt
+        ⏩   const userSchema = new mongoose.Schema({
+            👉🏻  email: { type: String, requred: true, unique: true },
+                ➕  unique는 고유한값으로 설정해준다.
+        ⏩  userSchema.pre("save", async function () {
+            👉🏻  this.password = await bcrypt.hash(this.password, 5);
+                ➕  await bcrypt.hash(password,해싱횟수)
+    
+    3.  userController.js 수정
+        ⏩   export const postJoin = async (req, res) => {
+            👉🏻  const exists = await User.exists({ $or: [{ username }, { email }] });
+                ➕  한번에 여러 condition을 조회하고싶을때 $or: [ {condition1}, {condition2} ] => return true / false
+
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
