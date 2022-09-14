@@ -1000,6 +1000,15 @@
             👉🏻  session middleware내부에 store: MongoStore.create({ mongoUrl: "mongoUrl복붙" }),
                 ➕  mongoUrl은 db.js에서 확인 가능
     
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#7.13
+    1.  session middleware에서 resave는 모든 request마다 갖고있던 session이 수정되지 않아도 그 session을 재저장 하는 옵션
+        saveUninitialized는 request가 들어오면 해당 request에서 새로 생성된 session이 수정되지 않아도 그 session을 저장 하는 옵션
+        ⏩   server.js 수정
+            👉🏻  resave: false,
+                saveUninitialized: false,
+                ➕  수정된것도 없는데 매번 session이 재저장되면 비효율적
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
