@@ -990,6 +990,18 @@
             👉🏻  localsMiddleware에 작성한 loggedInUser변수를 pug 템플릿에서 활용
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#7.12
+    1.  session Id는 브라우저 쿠키에 저장되고, session Data는 서버(express)의 memory store에 저장되어 서버가 재시작 되면 session이 날라간다
+        session을 유지하기 위하여 Mongo DB에 session을 저장해야 한다.
+        ⏩   server.js 수정
+            👉🏻  npm i connect-mongo
+            👉🏻  import MongoStore from "connect-mongo"
+            👉🏻  session middleware내부에 store: MongoStore.create({ mongoUrl: "mongoUrl복붙" }),
+                ➕  mongoUrl은 db.js에서 확인 가능
+    
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
