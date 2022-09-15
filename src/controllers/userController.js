@@ -106,7 +106,6 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(userData);
     const emailData = await (
       await fetch("https://api.github.com/user/emails", {
         headers: {
@@ -115,6 +114,7 @@ export const finishGithubLogin = async (req, res) => {
       })
     ).json();
     const emailObj = emailData.find((email) => email.primary === true && email.verified === true);
+    console.log(emailObj);
     if (!emailObj) {
       return res.redirect("/login");
     }
@@ -122,8 +122,20 @@ export const finishGithubLogin = async (req, res) => {
     if (existingUser) {
       req.session.loggedIn = true;
       req.session.user = existingUser;
+      return res.redirect("/");
     } else {
       //create an account
+      const user = await User.create({
+        name: userData.name,
+        username: userData.login,
+        email: emailObj.email,
+        password: "",
+        location: userData.location,
+        socialLogin: true,
+      });
+      req.session.loggedIn = true;
+      req.session.user = user;
+      return res.redirect("/");
     }
   } else {
     return res.redirect("/login");

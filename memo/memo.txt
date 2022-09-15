@@ -1042,8 +1042,112 @@
             👉🏻  secret: process.env.COOKIE_SECRET,
                 ➕  env파일안에 COOKIE_SECRET 변수를 사용
 
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#7.16~#7.21
     
-        
+    1.  소셜로그인 구현하는법 (깃헙로그인)
+        ⏩   흐름 : 깃헙로그인버튼을 누르면 사용자를 깃헙으로 보낸다  > 
+                    사용자가 깃헙 이메일비번등을 입력하고 자기 정보를 깃헙에서 우리서버에 공유하는것을 승인한다 > 
+                    깃헙은 사용자를 우리 웹사이트로 보낸다 > 
+                    깃헙은 사용자를 token과함께 redirect시킨다 > 
+                    우리는 그 token으로 사용자의 정보를 받아온다(token은 빠르게 만료된다)
+
+        ⏩   순서
+            👉🏻  0. 구글에 github oauth 입력후 나오는 GitHub Docs에 들어간다 (https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-app)
+            👉🏻  1. 깃헙 Application 생성
+                ➕  My Github  
+                    > 내 아이콘 클릭 후 Settings 
+                    > 왼쪽 Developer settings 
+                    > OAuth Apps 
+                    > New OAuth App 
+                    > name, URL, description 작성
+                    > Authorization callback URL 에 'http://localhost:4000/users/github/finish' 작성
+                    > Register application 버튼 
+                    > Client ID, Client secrets가 있는 페이지가 나온다
+            👉🏻  2. login.html에 user를 GitHub로 보내줄 a태그를 작성
+            👉🏻  3. a태그의 href를 /users/github/start로 작성하고 router와 controller를 만든다
+                ➕  GitHub에서 Client Id를 부여받고 환경변수(GH_CLIENT)로 담는다 (범용성의 이유) 
+                    > controller 내부에 config객체를 생성 후 allow_id, client_id, scope 등의 parameter를 property로 담는다 
+                        ( parameter종류는 GitHub Docs의 1번 URL 아래에 있고, 스네이크표기법을 사용해야한다 )
+                    > baseUrl변수를 만들어 GitHub Docs의 1번에 있는 url을 담아주고 
+                    > params변수를 만들어 config 객체를 인코딩 시킨다. 
+                        ( const params = new URLSearchParams(config).toString() )
+                    > finalUrl변수를 만들어 baseUrl과 params를 합치고 finalUrl을 redirect 시켜준다 
+                        ( params앞에는 ? 가 있어야한다 )
+            👉🏻  4. 유저가 a 태그를 누르면 유저는 GitHub로 보내지게 되고
+                    GitHub에서 정보 공유에 대한 승인을 누르면 GitHub는 1번에서 입력한 Authorization callback URL에 GET요청을 보내고 
+                    url query로 code를 보여준다 (주소창에서 확인가능)
+            👉🏻  5. Autorization callback URL에서 설정한 url의 router와 controller를 만들어준다
+                ➕  GitHub에서 Client secrets를 부여받고 환경변수(GH_SECRET)로 담는다 (보안상의 이유)
+                    > controller 내부에 config 객체를 생성 후 client_id, client_secret, code 등의 parameter를 property로 담는다 
+                        ( code값은 req.query.code ) ( parameter종류는 GitHub Docs의 2번 URL 아래에 있고, 스네이크표기법을 사용해야한다 )
+                    > baseUrl변수를 만들어 GitHub Docs의 2번에 있는 url을 담아주고 
+                    > params변수를 만들어 config 객체를 인코딩 시킨다.
+                        ( const params = new URLSearchParams(config).toString() )
+                    > finalUrl변수를 만들어 baseUrl과 params를 합친다.
+                        ( params앞에는 ? 가 있어야한다 )
+                    > data변수를 만들고 fetch함수를 이용해 finalUrl의 서버로 post로 요청한다. fetch(url)은 다른서버를 통해 데이터를 가져오는 함수다
+                        ( const data = await fetch(finalUrl, { method:"post" }) )
+                    > fetch함수로 받아온 데이터를 json형태로 변환해준다.
+                        ( const json = await data.json() )
+                    > json을 리턴받기위해 추가작업을 해준다
+                        ➡  5-1. await fetch (finalUrl, { method: "post", }에서 method property 다음에 headers property를 추가 ( headers:{} )
+                        ➡  5-2. GitHub Docs의 2번째 URL Response부분에서 두번째 box에 적혀있는 Accept: application/json 을 복사하여 headers:{}내부에 붙여넣기
+                        ➡  5-3. Accept: application/json 에서 application/json부분을 "application/json"로 바꿔준다.
+                    > fetch()를 동작시키기 위해 npm install node-fetch@2.6.1 를 하고 node-fetch를 import fetch from "node-fetch"해준다
+                    　  ( 브라우저와 NodeJS는 똑같이 JS를 사용하지만 NodeJS에서는 정의되지 않은 JS함수들이 있다. 예를들어 alert, fetch )
+                    > console.log(json)을 하면 access_token과 token_type과 scope를 받은걸 확인 할 수 있다.
+            👉🏻  6. json 안의 access_token을 갖고 API에 접근하여 유저의 정보를 얻는다
+                ➕  json안에 access_token이 담겨있다면 json으로부터 access_token을 꺼내어 access_token 변수에 담고,
+                    GitHub Docs의 3번째 GET 요청 URL에 fetch를 써주고 headers에 json으로 부터 받은 access_token을 함께 보낸다.
+                    만일 json안에 access_token이 없다면 login 페이지로 redirect 시켜준다
+                    >   if("access_token" in json){　　
+                      　    const {access_token} =json
+                      　    const userData= awiat fetch("https://api.github.com/user", {　
+                      　        heaers: {　
+                      　　　        Authorization: `token ${access_token}`,　　
+                                },
+                            });
+                      　} else {
+                      　    return res. redirect("/login");　　
+                      　}
+            👉🏻  7. const fialUrl 아래줄부터 코드를 전부 포맷팅 해주자
+                ➕  const tokenRequest = await (await fetch(finalUrl, { method:"POST", headers:{ Accept:"application/json",},})).json();
+                    ( const json = await data.json(); 은 지워주자)
+                    if ("access_token" in tokenRequest) {
+                        const { access_token } = tokenRequest;　
+                        const userData= await (await fetch("https://api.github.com/user",{ headers:{ Authorization: `token ${access_token}`,},})).json();
+                    }
+                    else { return res.redirect("/login");}
+            👉🏻  8. 이렇게 하면 user의 정보를 불러올수 있지만, email이 private일 경우 email:null 이라고 나온다, 이럴때 해결방안
+                ➕  const userData다음에 const emailData를 선언
+                    >   const emailData = await ( await fetch("https://api.github.com/user/emails", { headers: { Authorization: `token ${access_token}`,},})).json();
+                        console.log(emailData);
+            👉🏻  9. emailData변수 다음에 email변수를 만들어서 emailData에서 verified이면서 primary인 email데이터를 찾아서 변수에 email변수에 담는다
+                ➕  const emailObj = emailData.find((email)=>email.primary===true && email.verified===true);
+                　 　>  if(!emailObj){return res.redirect("/login")
+            👉🏻  10. emailObj안의 email이 이미 UserDB에 존재하는지 확인하고 존재한다면 해당유저를 login시킨다
+                ➕  const existingUser = await User.findOne({ email: emailObj.email });
+                    if (existingUser) {
+                        req.session.loggedIn = true;
+                        req.session.user = existingUser;
+                        return res.redirect("/");
+                    }else{
+            👉🏻  11. emailObj안의 email이 UserDB에 존재하지 않는다면 해당 email로 유저를 만든다
+                ➕  else {
+                        const user = await User.create({
+                            name: userData.name,
+                            username: userData.login,
+                            email: emailObj.email,
+                            password: "",
+                            location: userData.location,
+                            socialLogin: true,
+                        });
+                        req.session.loggedIn = true;
+                        req.session.user = user;
+                        return res.redirect("/");
+                    }
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
