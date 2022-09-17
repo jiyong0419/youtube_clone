@@ -43,7 +43,7 @@ export const postLogin = async (req, res) => {
     res.status(400).render("login", { pageTitle: "Login", errorMessage: "An account with this username deos not exists." });
   }
   // password체크
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username, socialLogin: false });
   const ok = await bcrypt.compare(password, user.password);
   if (!ok) {
     return res.status(400).render("login", {
@@ -60,11 +60,9 @@ export const edit = (req, res) => {
   res.send("Edit User");
 };
 
-export const remove = (req, res) => {
-  res.send("Remove User");
-};
 export const logout = (req, res) => {
-  res.send("Logout User");
+  req.session.destroy();
+  res.redirect("/");
 };
 export const see = (req, res) => {
   res.send("see User");
@@ -114,29 +112,25 @@ export const finishGithubLogin = async (req, res) => {
       })
     ).json();
     const emailObj = emailData.find((email) => email.primary === true && email.verified === true);
-    console.log(emailObj);
     if (!emailObj) {
       return res.redirect("/login");
     }
-    const existingUser = await User.findOne({ email: emailObj.email });
-    if (existingUser) {
-      req.session.loggedIn = true;
-      req.session.user = existingUser;
-      return res.redirect("/");
-    } else {
+    let user = await User.findOne({ email: emailObj.email });
+    if (!user) {
       //create an account
-      const user = await User.create({
+      user = await User.create({
         name: userData.name,
         username: userData.login,
         email: emailObj.email,
         password: "",
         location: userData.location,
         socialLogin: true,
+        avatarUrl: userData.avatar_url,
       });
-      req.session.loggedIn = true;
-      req.session.user = user;
-      return res.redirect("/");
     }
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect("/");
   } else {
     return res.redirect("/login");
   }

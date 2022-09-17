@@ -1132,10 +1132,12 @@
                     if (existingUser) {
                         req.session.loggedIn = true;
                         req.session.user = existingUser;
-                        return res.redirect("/");
-                    }else{
+　                      return res.redirect("/");
+                    } else{
+
             👉🏻  11. emailObj안의 email이 UserDB에 존재하지 않는다면 해당 email로 유저를 만든다
                 ➕  else {
+                        //create an account
                         const user = await User.create({
                             name: userData.name,
                             username: userData.login,
@@ -1143,6 +1145,7 @@
                             password: "",
                             location: userData.location,
                             socialLogin: true,
+                            avatarUrl: userData.avatar_url,
                         });
                         req.session.loggedIn = true;
                         req.session.user = user;
@@ -1150,7 +1153,15 @@
                     }
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#7.22
+    1.  userController 수정
+        ⏩   export const logout = (req, res) => {
+            👉🏻  req.session.destroy();
+                ➕  세션을 파괴한다.
+
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
