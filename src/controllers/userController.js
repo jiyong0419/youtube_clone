@@ -56,7 +56,10 @@ export const postLogin = async (req, res) => {
   return res.redirect("/");
 };
 
-export const edit = (req, res) => {
+export const getEdit = (req, res) => {
+  res.render("edit-profile");
+};
+export const postEdit = (req, res) => {
   res.send("Edit User");
 };
 
@@ -74,7 +77,7 @@ export const startGithubLogin = (req, res) => {
     allow_signup: false,
     scope: "read:user user:email",
   };
-  const params = new URLSearchParams(config);
+  const params = new URLSearchParams(config).toString();
   const finalUrl = `${baseUrl}?${params}`;
   return res.redirect(finalUrl);
 };
@@ -95,6 +98,7 @@ export const finishGithubLogin = async (req, res) => {
       },
     })
   ).json();
+  console.log(tokenRequest);
   if ("access_token" in tokenRequest) {
     const { access_token } = tokenRequest;
     const userData = await (
@@ -111,6 +115,7 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
+    console.log(emailData);
     const emailObj = emailData.find((email) => email.primary === true && email.verified === true);
     if (!emailObj) {
       return res.redirect("/login");
