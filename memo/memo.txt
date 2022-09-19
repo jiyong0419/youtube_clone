@@ -1204,7 +1204,19 @@
             👉🏻  Model.findByIdAndUpdate()는 기본적으로 업데이트전 데이터를 반환한다. 업데이트 후 데이터를 반환하려면 세번째 인자로 {new:true}를 해준다
 
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#8.4~#8.5 
+    1.  userController.js 수정
+        ⏩   export const getChangePassword = (req, res) => {
+            👉🏻  if (req.session.user.socialLogin) {return res.redirect("/");}
+                ➕  소셜로그인한사람은 change Password 페이지에 접근할수 없다.
+        ⏩   export const postChangePassword = async (req, res) => {
+            👉🏻  user.password = newPassword;
+                await user.save();
+                ➕  user.save()는 await를 꼭 해주자! ( 몽고디비에 접근 )
+
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
