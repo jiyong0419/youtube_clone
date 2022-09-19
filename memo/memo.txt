@@ -1193,7 +1193,18 @@
             👉🏻  route.all(middleware)은 get과 post 둘다에게 적용되는 미들웨어를 사용할 때 쓴다.
             
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#8.2 ~ 8.3
+    1. userController.js 수정
+        ⏩   export const postEdit = async (req, res) => {
+            👉🏻  session: { user: { _id, email: sessionEmail, username: sessionUsername },},
+                ➕  한 object에서 여러 property를 불러올때 사용하는 방법 ES6
+        ⏩   const updatedUser = await User.findByIdAndUpdate(_id,{name,username},{new:true})
+            👉🏻  Model.findByIdAndUpdate()는 첫번째 인자로 id를 받고 두번째 인자로 update할 내용들을 받는다.
+            👉🏻  Model.findByIdAndUpdate()는 기본적으로 업데이트전 데이터를 반환한다. 업데이트 후 데이터를 반환하려면 세번째 인자로 {new:true}를 해준다
+
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
