@@ -62,9 +62,10 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id, email: sessionEmail, username: sessionUsername },
+      user: { _id, email: sessionEmail, username: sessionUsername, avatarUrl },
     },
     body: { name, username, email, location },
+    file,
   } = req;
   //수정이 됬다면 중복확인
   const changeEmail = sessionEmail !== email;
@@ -84,6 +85,7 @@ export const postEdit = async (req, res) => {
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
+      avatarUrl: file ? file.path : avatarUrl,
       name,
       username,
       email,

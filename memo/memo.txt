@@ -1216,6 +1216,46 @@
                 ➕  user.save()는 await를 꼭 해주자! ( 몽고디비에 접근 )
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#8.6~#8.8
+    1.  Multer package
+        ⏩   multer는 form으로 부터 받은 파일을 어디에 저장할지 지정해주는 미들웨어
+        ⏩   npm i multer
+    
+    2.  파일 업로드하는법
+        ⏩   pug에서 file을 받는 input을 만들어준다
+    　      👉🏻  form에 enctype="multipart/form-data" 속성을 추가
+    　      👉🏻  form 내부에 label( for="avatar") Avatar 추가
+    　      👉🏻  label 아래줄에 input( type="file", id="avatar", name="avatar", accept="image/*" ) 추가
+                ➕  { label은 input id를 따르고 accept="image/*"는 image파일만 허용함 } 
+    
+        ⏩   Multer를 설치하고 middleware.js에 middle ware를 작성한다
+    　      👉🏻  npm i multer
+    　　        ➕  { Multer는 form으로 부터 오는 파일을 어디에 저장할지 지정해주는 미들웨어 }
+    　      👉🏻  import multer from "multer"
+    　      👉🏻  export const uploadFiles = multer( { dest:"uploads/" } )
+    　　        ➕  { dest는 파일을 저장할 위치(폴더명)이고 uploads폴더가 자동으로 생성됨 }
+    
+        ⏩   uploads폴더를 .gitignore에 추가한다
+            👉🏻  /uploads
+    
+        ⏩   router에 multer middelware를 적용시킨다
+    　      👉🏻  userRouter.route("/edit").~~~.post( uploadFiles.single("avatar"), postEdit )
+    　　        ➕  { single은 파일을 한개만 선택한다는 뜻이고 single()안에는 type=file인 input의 name을 쓴다 )
+    
+        ⏩   controller에서 form으로부터 전송된 file을 받아서 데이터에 적용시킨다
+    　      👉🏻  postEdit controller 내부에 req.file , req.session.user.avatarUrl
+    　      👉🏻  postEdit controller 내부에 const updateUser 내부에  avatarUrl : file ? file.path : avatarUrl 추가
+    　　        ➕  { modelScheema에 avartarUrl:String이 있어야함 }
+    
+        ⏩   pug에서 req.file을 통해 가져온 이미지를 띄워보자
+    　      👉🏻  img( src="/"+ loggedInUser.avatarUrl )
+    　　　　    ➕  { "/"를 붙히지 않으면 relative Url로 적용된다 }
+    
+        ⏩   server.js에서 브라우저를 upload폴더에 접근할수 있도록 설정해주어야 한다. ( static files serving )
+    　      👉🏻  app.use( "/uploads", express.static("uploads"))
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
