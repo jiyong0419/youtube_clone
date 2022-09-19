@@ -1255,8 +1255,15 @@
         ⏩   server.js에서 브라우저를 upload폴더에 접근할수 있도록 설정해주어야 한다. ( static files serving )
     　      👉🏻  app.use( "/uploads", express.static("uploads"))
 
-🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#8.9    
+    1.  watch.pug 수정
+        ⏩   video(src="/"+video.videoUrl, controls)
+            👉🏻  video 태그의 속성으로 controls는 controler를 보여준다
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
