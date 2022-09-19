@@ -1261,9 +1261,20 @@
     1.  watch.pug 수정
         ⏩   video(src="/"+video.videoUrl, controls)
             👉🏻  video 태그의 속성으로 controls는 controler를 보여준다
+    
+    2.  middlewares.js 수정
+        ⏩   export const avatarUpload = multer({
+            👉🏻  limits: {fileSize: 3000000,} 
+                ➕  업로드 파일의 크기를 설정할때 사용한다.
 
-🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#8.11
+    1.  userController.js 수정
+        ⏩   export const see = async (req, res) => {}
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 

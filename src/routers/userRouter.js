@@ -9,6 +9,6 @@ userRouter.route("/change-password").all(protectorMiddleware).get(getChangePassw
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
 userRouter.get("/logout", protectorMiddleware, logout);
-userRouter.get("/:id(\\d+)", see);
+userRouter.get("/:id([a-f0-9]{24})", see);
 
 export default userRouter;
