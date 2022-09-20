@@ -1280,7 +1280,22 @@
         ⏩   owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "USER" },
             👉🏻  Video Scheema에 owner를 추가
                 ➕  mongoose.Schema.Types.ObjectId는 mongoose에서 제공하는 ObjectId 타입이고 mongoose 코드에서만 쓸수있다.
-                ➕  ref는 이 owner라는 objectId 타입의 objectId가 어떤 Model로부터 오는지 설정해준다.
+                ➕  ref는 이 owner라는 object 타입의 objectId가 어떤 Model로부터 오는지 설정해준다.
+    
+    2.  watch.pug 수정
+        ⏩   if String(video.owner)===loggedInUser._id
+            👉🏻  video.owner는 object 타입이므로 String으로 변환해준다
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#8.12
+    1.  videoController.js 수정
+        ⏩   const video = await Video.findById(id).populate("owner");
+            👉🏻  populate("owner")는 owner값으로 videoSchema에 owner가 참조하고있는 User.js를 참조하여 데이터를 불러온다.
+                ➕  owner는 populate가 발생시 ref에 설정되었던 User.js를 참조하고, owner의 값으로 User.js에서 값과 일치하는 id를 가진 User 데이터를 리턴한다.
+    1.  userController.js 수정
+        ⏩    const videos = await Video.find({ owner: user._id });
+            👉🏻  Model.find({condition})은 array를 return한다 ( condition에 맞는 데이터가 여러개 일 수 있기 때문 )
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
