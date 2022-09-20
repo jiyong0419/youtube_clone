@@ -1269,9 +1269,18 @@
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 
-#8.11
+#8.10
     1.  userController.js 수정
         ⏩   export const see = async (req, res) => {}
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#8.11   
+    1.  Video.js 수정
+        ⏩   owner: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "USER" },
+            👉🏻  Video Scheema에 owner를 추가
+                ➕  mongoose.Schema.Types.ObjectId는 mongoose에서 제공하는 ObjectId 타입이고 mongoose 코드에서만 쓸수있다.
+                ➕  ref는 이 owner라는 objectId 타입의 objectId가 어떤 Model로부터 오는지 설정해준다.
 
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
