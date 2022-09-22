@@ -1376,12 +1376,15 @@
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 
 #9.4
-    1.  src> scss폴더 생성
+    SCSS적용법1
+
+    1.  src> client> scss폴더 생성
     
     2.  scss> styles.scss 생성
         ⏩   @import "./_variable";
             body { color : $red }
             👉🏻  scss에서 변수 사용법
+
     3.  scss> _variable.scss 생성
         ⏩   $red : red;
             👉🏻  scss에서 변수 설정법
@@ -1391,7 +1394,7 @@
         npm i --save-dev css-loader
         npm i --save-dev style-loader
 
-    5.  webpack.config.js 생성
+    5.  webpack.config.js 수정
         ⏩   {
                 test: /\.scss$/,
                 use: ["style-loader","css-loader","sass-loader"],
@@ -1400,6 +1403,44 @@
             👉🏻  sass-loader는 scss파일을 가져다가 css파일로 전환시켜줌
             👉🏻  css-loader는 @import와 url()을 풀어서 해석해줌
             👉🏻  style-loader는 css를 DOM에 주입한다
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#9.5
+    SCSS적용법2  (webpack 플러그인=MiniCssExtractPlugin 사용)
+    MiniCssExtractPlugin은
+    scss를 별도의  css파일로 만들어준다
+
+    1.  src> client> scss 폴더생성
+    
+    2.  scss> styles.scss 생성
+        ⏩   @import "./_variable";
+            body { color : $red }
+            👉🏻  scss에서 변수 사용법
+
+    3.  scss> _variable.scss 생성
+        ⏩   $red : red;
+            👉🏻  scss에서 변수 설정법
+
+    4.  npm i sass-loader sass webpack --save-dev
+        npm i --save-dev css-loader
+        npm install --save-dev mini-css-extract-plugin
+
+    5.  webpack.config.js 수정
+        ⏩   const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+        ⏩   module.export={ }안에 plugins:[new MiniCssExtractPlugin()],
+        ⏩   output : { }안에 filename: "js/main.js", path: path.resolve(__dirname, "assets"),
+        ⏩   rules : [ ]안에　{ test : /\.scss$/, use : [ MiniCssExtractPlugin.loader, "css-loader", "sass-loader" ],},
+            👉🏻  여러 로더들을 한번에 합칠땐 실행 역순으로
+            👉🏻  sass-loader는 scss파일을 가져다가 css파일로 전환시켜줌
+            👉🏻  css-loader는 @import와 url()을 풀어서 해석해줌
+
+    6.  npm run assets
+        ⏩   assets/js에 main.css파일이 생성된다
+
+    7.  base.pug 수정
+        ⏩   base.pug에서 head안에 link(link rel="stylesheet" href="/assets/css/styles.css")
+            👉🏻  미리 server.js에서 /assets경로를 static으로 지정해주어야한다
 
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈

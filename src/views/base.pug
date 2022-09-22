@@ -3,6 +3,7 @@ html(lang="ko")
     head 
         title #{pageTitle} | Youtube   
         link(link rel="stylesheet" href="https://unpkg.com/mvp.css@1.10.2/mvp.css")
+        link(link rel="stylesheet" href="/assets/css/styles.css")
     body
         header
             h1=pageTitle
@@ -29,4 +30,3 @@ html(lang="ko")
         main 
             block content
         include partials/footer.pug
-        script(src="/assets/js/main.js")
