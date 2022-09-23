@@ -4,10 +4,16 @@ const path = require("path");
 module.exports = {
   entry: "./src/client/js/main.js",
   mode: "development",
-  plugins: [new MiniCssExtractPlugin({ filename: "css/styles.css" })],
+  watch: true,
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "css/styles.css",
+    }),
+  ],
   output: {
     filename: "js/main.js",
     path: path.resolve(__dirname, "assets"),
+    clean: true,
   },
   module: {
     rules: [
@@ -16,7 +22,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [["@babel/preset-env", { targets: "defaults" }]],
+            presets: [["@babel/preset-env"], { targets: "defaults" }],
           },
         },
       },

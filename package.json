@@ -8,8 +8,8 @@
     "url": "git+https://github.com/jiyong0419/youtube_clone.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/init.js",
-    "assets": "webpack --config webpack.config.js"
+    "dev": "nodemon ",
+    "assets": "webpack"
   },
   "author": "Jiyong",
   "license": "ISC",
