@@ -23,20 +23,21 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(protectedMiddleware);
 app.use(express.urlencoded({ extended: true }));
+// post된 form으로 부터 정보를 읽어들일 준비를 한다. (req.body)
 
 app.use(
   session({
-    secret: process.env.COOKIE_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
-    cookie: { maxAge: 3600000 },
+    secret: process.env.COOKIE_SECRET, // 우리 서버가 제공한 세션이라는 싸인
+    resave: false, // 기존 세션에 수정사항이 없으면 저장하지 않음
+    saveUninitialized: false, // 신규 세션이 수정사항이 없으면 저장하지 않음
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }), // 세션 데이터를 Mongo Store에 저장함 (기본값은 서버의 Memory Store)
+    cookie: { maxAge: 3600000 }, // 세션의 만료기한 (1000 = 1s)
   })
 );
 
 app.use(localsMiddleware);
-app.use("/uploads", express.static("uploads"));
-app.use("/assets", express.static("assets"));
+app.use("/uploads", express.static("uploads")); // upload 요청이 들어오면 upload폴더에 접근시켜줌
+app.use("/assets", express.static("assets")); // assets 요청이 들어오면 assets폴더에 접근시켜줌
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);

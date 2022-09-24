@@ -1,7 +1,7 @@
 "use strict";
 import User from "../models/User";
 import bcrypt from "bcrypt";
-import fetch from "node-fetch";
+import fetch from "node-fetch"; // node-fetch패키지는 Node.js에게 fetch 함수를 이해시킨다
 import Video from "../models/Video";
 
 export const getJoin = (req, res) => {
@@ -45,7 +45,7 @@ export const postLogin = async (req, res) => {
   }
   // password체크
   const user = await User.findOne({ username, socialLogin: false });
-  const ok = await bcrypt.compare(password, user.password);
+  const ok = await bcrypt.compare(password, user.password); // password를 해싱했을때 user.password가 나오는가 true / false
   if (!ok) {
     return res.status(400).render("login", {
       pageTitle: "Login",
@@ -92,7 +92,7 @@ export const postEdit = async (req, res) => {
       email,
       location,
     },
-    { new: true }
+    { new: true } // findByIdAndUpdate는 변경전 Data를 반환하지만, new:ture를 해주면 변경후 Data를 반환해줌
   );
   req.session.user = updatedUser;
   return res.redirect("/");
@@ -104,6 +104,8 @@ export const logout = (req, res) => {
 export const see = async (req, res) => {
   const { id } = req.params;
   const user = await User.findById(id).populate("videos");
+  // user.videos = ObjectId[16진수 24자리]
+  // populate를 사용하면 user.videos = [{video객체},{video객체}....]
   if (!user) {
     return res.status(404).render("404", { pageTitle: "User not found." });
   }

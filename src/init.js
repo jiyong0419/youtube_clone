@@ -11,4 +11,4 @@ const handleListening = () => {
   console.log(`✅ Server listening on port http://localhost:${PORT} 🚀`);
 };
 
-app.listen(PORT, handleListening); // 서버에 포트번호 부여
+app.listen(PORT, handleListening); // 서버에 포트번호 부여하고, 서버 포트가 열리면 콜백함수 실행
