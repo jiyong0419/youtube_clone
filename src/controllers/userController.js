@@ -2,7 +2,6 @@
 import User from "../models/User";
 import bcrypt from "bcrypt";
 import fetch from "node-fetch"; // node-fetch패키지는 Node.js에게 fetch 함수를 이해시킨다
-import Video from "../models/Video";
 
 export const getJoin = (req, res) => {
   res.render("join", { pageTitle: "Join" });
