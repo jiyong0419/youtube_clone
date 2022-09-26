@@ -102,7 +102,13 @@ export const logout = (req, res) => {
 };
 export const see = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id).populate("videos");
+  const user = await User.findById(id).populate({
+    path: "videos",
+    populate: {
+      path: "owner",
+      model: "User",
+    },
+  });
   // user.videos = ObjectId[16진수 24자리]
   // populate를 사용하면 user.videos = [{video객체},{video객체}....]
   if (!user) {
