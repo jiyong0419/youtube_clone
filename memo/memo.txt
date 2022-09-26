@@ -1465,8 +1465,17 @@
                 "assets":"webpack"
                 ➕  scss나 client등 front쪽의 파일들이 저장될때, backend가 재실행 되는것을 막아준다.
 
-🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#11.0
+    1.  webpack.config.js 수정
+        ⏩   enrty:{ main : "./src~~~main.js", videoPlayer : "./src~~~videoPlayer.js" }
+            👉🏻  entry에 여러가지 파일을 등록할수 있다.
+        ⏩   output : { filename : "js/[name].js" }
+            👉🏻  Webpack이 [name]칸을 알아서 entry의 프로퍼티랑 일치시켜서 파일명을 반환해준다
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 

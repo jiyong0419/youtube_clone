@@ -3,7 +3,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // export 구식버전
 module.exports = {
-  entry: "./src/client/js/main.js", // entry : webpack에게 전달할 파일 경로
+  entry: {
+    main: "./src/client/js/main.js",
+    videoPlayer: "./src/client/js/videoPlayer.js",
+  }, // entry : webpack에게 전달할 파일 경로
   mode: "development", // mode: webpack에게 아직 개발중인지, 완성품인지 알려줌
   plugins: [
     new MiniCssExtractPlugin({
@@ -12,7 +15,7 @@ module.exports = {
   ],
   watch: true, // webpack
   output: {
-    filename: "js/main.js", //
+    filename: "js/[name].js", // webpack이 알아서 [name]에 entry의 프로퍼티를 집어넣어준다.
     path: path.resolve(__dirname, "assets"), // path : webpack이 반환할 파일명과 경로
     clean: true,
   },
