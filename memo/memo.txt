@@ -1505,8 +1505,22 @@
         ⏩    currentTime.innerText = Math.floor(video.currentTime);
             👉🏻  video.duration은 HTMLMediaElement에서 제공해주는 옵션이다
 
-🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#11.5
+    1.  videoPlayer.js 수정
+        ⏩   const formatTime = (second) => {
+                return new Date(second * 1000).toISOString.substr(11, 8);
+            }
+            👉🏻  new Date()는 1970년1월1일을 기준으로 입력한 값만큼 흐른 시간을 리턴해준다
+                ➕  new Date(1000) = Thu Jan 01 1970 09:00:01 GMT+0900 (한국 표준시) // 1000은 1000ms
+            👉🏻  toISOString()은 국제 표준 날짜 형식으로 값을 리턴한다. 
+                ➕  new Date(1000).toISOString(); = '1970-01-01T00:00:01.000Z'
+            👉🏻  substr(11,8)은 문자열의 처음(0번째)부터 11번째 문자를 기준(포함) 그 뒤 8개 문자들을 리턴해준다
+                ➕  new Date(1000).toISOString().substr(11,8) = 00:00:01
+
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
