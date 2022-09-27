@@ -1488,10 +1488,25 @@
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 
 #11.2~#11.3
-    ⏩   const handleMute = (e) => {}
+    1.  videoPlayer.js수정
+        ⏩   const handleMute = (e) => {}
 
-🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#11.4
+    1.  videoPlayer.js수정
+        ⏩   video.addEventListener("loadedmetadata", handleLoadedMetadata);
+            👉🏻  loadedmetadata 이벤트는 HTMLMediaElement(video,audio)에 등록할수 있는 이벤트이다.
+                ➕  metadata는 부수적인 옵션들
+        ⏩   video.addEventListener("timeupdate", handleTimeUpdate);
+            👉🏻  timeupdate는 media의 현재시간이 변경될때마다 실행되는 이벤트이다. ( 자동으로 진행되던, 수동으로 시간을 변경하던 )
+        ⏩    totalTime.innerText = Math.floor(video.duration);
+            👉🏻  video.duration은 HTMLMediaElement에서 제공해주는 옵션이다
+        ⏩    currentTime.innerText = Math.floor(video.currentTime);
+            👉🏻  video.duration은 HTMLMediaElement에서 제공해주는 옵션이다
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
