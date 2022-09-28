@@ -85,10 +85,6 @@ const handleLoadedMetadata = () => {
 const handleTimeUpdate = () => {
   currentTime.innerText = formatTime(Math.floor(video.currentTime));
   timeline.value = Math.floor(video.currentTime);
-  if (video.currentTime === video.duration) {
-    video.currentTime = 0;
-    playBtnIcon.classList = "fas fa-play";
-  }
 };
 
 /**/
@@ -142,6 +138,7 @@ const handleKeypress = (e) => {
 };
 
 /**/
+
 const handleFullScreen = () => {
   if (document.fullscreenElement === null) {
     // document.fullScreenElement는 전체화면 된 요소를 리턴해준다
@@ -157,6 +154,15 @@ const handleFullScreen = () => {
 
 /**/
 
+const handleEnded = () => {
+  const { id } = videoContainer.dataset;
+  video.currentTime = 0;
+  playBtnIcon.classList = "fas fa-play";
+  fetch(`/api/videos/${id}/view`, { method: "post" });
+};
+
+/**/
+
 muteBtn.addEventListener("click", handleMute);
 
 volumeRange.addEventListener("input", handleVolumeChange); // input이벤트는 input의 value가 변경될때마다 발생한다.
@@ -167,6 +173,7 @@ timeline.addEventListener("input", handleTimelineChange);
 
 video.addEventListener("loadedmetadata", handleLoadedMetadata); // loadedmetadata는 media의 metadata가 로딩이 완료되었을때 발생한다.
 video.addEventListener("timeupdate", handleTimeUpdate); // media의 currentTime이 변할때마다 발생한다.
+video.addEventListener("ended", handleEnded); // media가 끝났을때 발생한다.
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 video.addEventListener("click", handleVideoClick);
