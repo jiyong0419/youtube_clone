@@ -6,6 +6,7 @@ module.exports = {
   entry: {
     main: "./src/client/js/main.js",
     videoPlayer: "./src/client/js/videoPlayer.js",
+    recorder: "./src/client/js/recorder.js",
   }, // entry : webpack에게 전달할 파일 경로
   mode: "development", // mode: webpack에게 아직 개발중인지, 완성품인지 알려줌
   plugins: [
