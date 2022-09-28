@@ -13,16 +13,16 @@ module.exports = {
       filename: "css/style.css",
     }),
   ],
-  watch: true, // webpack
+  watch: true, // webpack자동실행
   output: {
     filename: "js/[name].js", // webpack이 알아서 [name]에 entry의 프로퍼티를 집어넣어준다.
-    path: path.resolve(__dirname, "assets"), // path : webpack이 반환할 파일명과 경로
+    path: path.resolve(__dirname, "assets"), // path.resolve()는 여러 인자를 넣으면 하나의 경로로 합쳐준다, path : webpack이 반환할 파일명과 경로
     clean: true,
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js$/, // js로 끝나는 파일에 loader를 적용한다
         use: {
           loader: "babel-loader",
           options: {
@@ -31,7 +31,7 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.scss$/, // scss로 끝나는 파일에 loader를 적용한다
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],

@@ -1519,8 +1519,26 @@
             👉🏻  substr(11,8)은 문자열의 처음(0번째)부터 11번째 문자를 기준(포함) 그 뒤 8개 문자들을 리턴해준다
                 ➕  new Date(1000).toISOString().substr(11,8) = 00:00:01
 
-🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+
+#11.9
+    1.  videoPlayer.js수정  
+        ⏩   const handleMouseMove = () => {
+                if (controlsTimeout) {
+                  clearTimeout(controlsTimeout);
+                  controlsTimeout = null;
+                }
+                videoControls.classList.add("showing");
+            };
+            👉🏻  
+        ⏩   const handleMouseLeave = () => {
+                controlsTimeout = setTimeout(() => {
+                  videoControls.classList.remove("showing");
+                }, 3000);
+            };
+
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
 여태까ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ지 배운걸 토대로 순서
 
