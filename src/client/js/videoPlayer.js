@@ -155,10 +155,10 @@ const handleFullScreen = () => {
 /**/
 
 const handleEnded = () => {
-  const { id } = videoContainer.dataset;
+  const { video_id } = videoContainer.dataset;
   video.currentTime = 0;
   playBtnIcon.classList = "fas fa-play";
-  fetch(`/api/videos/${id}/view`, { method: "post" });
+  fetch(`/api/videos/${video_id}/view`, { method: "post" });
 };
 
 /**/
