@@ -1573,6 +1573,21 @@
         ⏩   video.srcObject = stream;
             👉🏻  media의 srcObjec속성에 stream을 담음
 
+🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
+
+#13.2
+    1.  recorder.js 수정
+        ⏩   startRecBtn.removeEventListener("click", handleStartRec);
+            👉🏻  removeEventListener는 event를 삭제한다
+        ⏩   const recorder = new MediaRecorder(stream);
+            👉🏻  new MediaRecorder는 미디어장치를 인자로 받아서 녹화기능을 제공한다
+        ⏩   recorder.start() 
+            👉🏻  녹화를 시작한다
+        ⏩   recorder.stop()
+            👉🏻  녹화를 중지하고 dataAvailable이벤트를 반환한다.
+        ⏩   recorder.ondataavailable = (e) => {}
+            👉🏻  recorder.stop()으로 인해 발생한 dataAvailable이벤트를 캐치한다
+
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
