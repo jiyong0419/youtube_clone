@@ -1588,6 +1588,21 @@
         ⏩   recorder.ondataavailable = (e) => {}
             👉🏻  recorder.stop()으로 인해 발생한 dataAvailable이벤트를 캐치한다
 
+🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞   
+
+#13.3
+    1.  recorder.js 수정
+        ⏩   recorder = new MediaRecorder(stream)
+            👉🏻  new MediaRecorder는 녹화기능을 제공하고 유저의미디어장치(navigator.mediaDevices.getUserMedia())를 인자로 받는다
+        ⏩   recorder.ondataavailable = (e) => {
+                const videoFile = URL.createObjectURL(e.data); 
+                    👉🏻  브라우저에서만 사용가능한 녹화본의 URL이 만들어진다.
+                video.srcObject = null;
+                video.src = videoFile;
+                    👉🏻  새롭게 얻은 URL을 video.src로 설정
+                video.loop = true;
+                video.play();
+
 🌞        🌞          🌞          🌞          🌞          🌞          🌞          🌞       
 🌈        🌈          🌈          🌈          🌈          🌈          🌈          🌈
 ❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤❤🧡💛💚💙💜🤎🖤
