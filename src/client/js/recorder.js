@@ -4,13 +4,20 @@ const video = document.querySelector("#preview");
 
 let stream;
 let recorder;
+let videoFile;
 
-const handleDownload = () => {};
+const handleDownload = () => {
+  const a = document.createElement("a");
+  a.href = videoFile;
+  a.download = "MyRecoding.webm"; // a태그를 누르면 이동시켜주는게 아니라 다운로드를 시켜줌
+  document.body.appendChild(a);
+  a.click();
+};
 
 const handleStopRec = () => {
   startRecBtn.innerText = "Download Recording";
   startRecBtn.removeEventListener("click", handleStopRec);
-  startRecBtn.addEventListener("click", handleStartRec);
+  startRecBtn.addEventListener("click", handleDownload);
 
   recorder.stop();
 };
@@ -24,7 +31,7 @@ const handleStartRec = () => {
   recorder.ondataavailable = (e) => {
     // console.log(e);
     // console.log(e.data);
-    const videoFile = URL.createObjectURL(e.data); // 브라우저 메모리에서만 가능한 URL을 만들어준다
+    videoFile = URL.createObjectURL(e.data); // 브라우저 메모리에서만 가능한 URL을 만들어준다
     video.srcObject = null;
     video.src = videoFile;
     video.loop = true;
