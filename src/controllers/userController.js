@@ -98,6 +98,7 @@ export const postEdit = async (req, res) => {
 };
 export const logout = (req, res) => {
   req.session.destroy();
+  req.flash("info", "Bye Bye");
   return res.redirect("/");
 };
 export const see = async (req, res) => {
@@ -189,6 +190,7 @@ export const finishGithubLogin = async (req, res) => {
 
 export const getChangePassword = (req, res) => {
   if (req.session.user.socialLogin) {
+    req.flash("error", "Can't change password");
     return res.redirect("/");
   }
   return res.status(400).render("change-password", { pageTitle: "Chage Password" });
@@ -210,5 +212,6 @@ export const postChangePassword = async (req, res) => {
   }
   user.password = newPassword;
   await user.save();
+  req.flash("info", "Password updated");
   return res.redirect("/users/logout");
 };

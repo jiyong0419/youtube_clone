@@ -4,6 +4,7 @@ import morgan from "morgan";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middlewares";
+import flash from "express-flash";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -36,6 +37,7 @@ app.use(
   })
 );
 
+app.use(flash());
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads")); // upload 요청이 들어오면 upload폴더에 접근시켜줌
 app.use("/assets", express.static("assets")); // assets 요청이 들어오면 assets폴더에 접근시켜줌
