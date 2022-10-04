@@ -26,6 +26,7 @@ app.use(logger);
 app.use(protectedMiddleware);
 app.use(express.urlencoded({ extended: true }));
 // post된 form으로 부터 정보를 읽어들일 준비를 한다. (req.body)
+app.use(express.json());
 
 app.use(
   session({

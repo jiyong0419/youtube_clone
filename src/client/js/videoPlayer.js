@@ -13,10 +13,10 @@ const videoContainer = document.querySelector("#videoContainer");
 const videoControls = document.querySelector("#videoControls");
 
 let volumeValue = 0.5;
-video.volume = volumeValue; // 볼륨은 volumeValue 값
+video.volume = volumeValue;
 
+// video가 mute이면 mute를 풀고 unmute상태이면 mute를 걸어준다.
 const handleMute = () => {
-  // muteBtn을 눌렀을때 mute상태이면 mute를 풀어주고 unmute상태이면 mute를 걸어준다.
   if (video.muted) {
     video.muted = false;
   } else {
@@ -69,8 +69,9 @@ const handleTimelineChange = (event) => {
 
 const formatTime = (second) => {
   return new Date(second * 1000).toISOString().substring(11, 19);
-  // new Date(1000) = "Thu Jan 01 1970 09:00:01 GMT+0900 (한국 표준시) {}" 을 반환,  new Date(1000).toISOString()는 "1970-01-01T00:00:01.000Z"(국제표준날짜형식)를 반환,
-  // subStr(11,19)은 문자열의 11번째자리 (0부터시작)에서 19번째 까지 잘라서 반환
+  // new Date(1000) = "Thu Jan 01 1970 09:00:01 GMT+0900 (한국 표준시) {}"
+  // new Date(1000).toISOString() = "1970-01-01T00:00:01.000Z"  <<(국제표준날짜형식)
+  // subStr(11,19)은 문자열의 11번째자리 (0부터시작)에서 19번째 전까지 잘라서 반환
 };
 
 /**/
@@ -140,14 +141,14 @@ const handleKeypress = (e) => {
 /**/
 
 const handleFullScreen = () => {
+  // document.fullScreenElement는 전체화면 된 요소를 리턴해준다
   if (document.fullscreenElement === null) {
-    // document.fullScreenElement는 전체화면 된 요소를 리턴해준다
+    // Element.requestFullscreen()은 요소를 전체화면으로 해준다
     videoContainer.requestFullscreen();
-    // requestFullscreen()은 요소를 전체화면으로 해준다
     fullScreenIcon.classList = "fas fa-compress";
   } else {
-    document.exitFullscreen();
     // document.exitFullscreen()은 전체화면을 종료해준다
+    document.exitFullscreen();
     fullScreenIcon.classList = "fas fa-expand";
   }
 };
@@ -173,10 +174,10 @@ timeline.addEventListener("input", handleTimelineChange);
 
 video.addEventListener("loadedmetadata", handleLoadedMetadata); // loadedmetadata는 media의 metadata가 로딩이 완료되었을때 발생한다.
 video.addEventListener("timeupdate", handleTimeUpdate); // media의 currentTime이 변할때마다 발생한다.
+video.addEventListener("click", handleVideoClick);
 video.addEventListener("ended", handleEnded); // media가 끝났을때 발생한다.
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
-video.addEventListener("click", handleVideoClick);
 document.addEventListener("keypress", handleKeypress);
 
 fullScreenBtn.addEventListener("click", handleFullScreen);
