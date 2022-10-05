@@ -37,6 +37,11 @@ app.use(
     cookie: { maxAge: 3600000 }, // 세션의 만료기한 (1000 = 1s)
   })
 );
+app.use((req, res, next) => {
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  next();
+}); // ffmpeg6
 
 app.use(flash());
 app.use(localsMiddleware);

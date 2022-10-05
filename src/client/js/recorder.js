@@ -1,4 +1,7 @@
-// upload.pug에서 script
+// recorder.js는 upload.pug에서 script
+// ffmpeg1 (녹화본 webm파일을 mp4로 변환하기 )
+import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
+
 const startRecBtn = document.querySelector("#startRecBtn");
 const video = document.querySelector("#preview");
 
@@ -7,10 +10,29 @@ let recorder;
 let videoFile;
 
 // handleDownload가 실행되면 html에 videoFile이 담긴 a 태그를 생성하고 그것을 클릭까지 구현한다.
-const handleDownload = () => {
+const handleDownload = async () => {
+  //ffmpeg2,ffmpeg3  >> 여기까지 ffmpeg를 불러오는 과정
+  const ffmpeg = createFFmpeg({ log: true });
+  await ffmpeg.load();
+
+  //ffmpeg4 >> ffmpeg는 브라우저상에서 파일을 관리해주는 소프트웨어, 1번쨰인자 = 쓰기, 2번째인자 = 원하는파일명.webm, 3번쨰인자 = binaryData = fetchFile함수를 이용하여 blob파일을 binaryData로 변환
+  ffmpeg.FS("writeFile", "recording.webm", await fetchFile(videoFile));
+
+  //ffmpeg5 >> ffmpeg에게 할일을 부여 = 유저의 브라우저에 recording.webm을 초당프레임 60 mp4로 변환하여 그 파일을 인풋(-i는 인풋) >> ffmpeg파일시스템에 output.mp4가 생김
+  await ffmpeg.run("-i", "recording.webm", "-r", "60", "output.mp4");
+
+  //ffmpeg7 (ffmpeg6은 sever.js에 존재) >> ffmpeg파일시스템에서 output.mp4를 읽어들여 mp4File변수에 할당 (mp4File은 Uin8Array(280649)[0,0,0,32,102..] 이런식으로 생겼고 이것이 브라우저에서 mp4파일을 표현하는 방식이다)
+  const mp4File = ffmpeg.FS("readFile", "output.mp4");
+
+  //ffmpeg8 >> mp4File을 Blob으로 변환 (mp4File.buffer는 몰라도돼 그냥써)
+  const mp4Blob = new Blob([mp4File.buffer], { type: "video/mp4" });
+
+  //ffmpeg9 >> mp4Blob을 url로 변경후 아래 a태그에 적용해주자
+  const mp4Url = URL.createObjectURL(mp4Blob);
+
   const a = document.createElement("a");
-  a.href = videoFile;
-  a.download = "MyRecoding.webm"; // a태그를 누르면 이동시켜주는게 아니라 다운로드를 시켜줌
+  a.href = mp4Url;
+  a.download = "MyRecoding.mp4"; // a태그를 누르면 이동시켜주는게 아니라 다운로드를 시켜줌
   document.body.appendChild(a);
   a.click();
 };
@@ -32,6 +54,7 @@ const handleStartRec = () => {
   recorder.start();
   // recorder.stop()되었을떄 dataAvailable이벤트를 반환하는데 그것을 캐치
   recorder.ondataavailable = (event) => {
+    //event.data는 Blob파일의 정보 size, type이 들어있다
     //URL.createObjectURL() : blob으로 시작하는 URL(파일을 가리키는 URL)을 만들어서 브라우저의 메모리에 저장해둔다
     videoFile = URL.createObjectURL(event.data);
     video.srcObject = null;
