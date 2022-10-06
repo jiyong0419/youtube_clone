@@ -1,5 +1,5 @@
 // recorder.js는 upload.pug에서 script
-// ffmpeg1 (녹화본 webm파일을 mp4로 변환하기 )
+// ffmpeg1 (녹화본 webm파일을 mp4로 변환하기 )  $ npm install @ffmpeg/ffmpeg @ffmpeg/core
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
 
 const startRecBtn = document.querySelector("#startRecBtn");
@@ -11,6 +11,9 @@ let videoFile;
 
 // handleDownload가 실행되면 html에 videoFile이 담긴 a 태그를 생성하고 그것을 클릭까지 구현한다.
 const handleDownload = async () => {
+  startRecBtn.removeEventListener("click", handleDownload);
+  startRecBtn.innerText = "Transcoding...";
+  startRecBtn.disabled = true;
   //ffmpeg2,ffmpeg3  >> 여기까지 ffmpeg를 불러오는 과정
   const ffmpeg = createFFmpeg({ log: true });
   await ffmpeg.load();
@@ -20,6 +23,17 @@ const handleDownload = async () => {
 
   //ffmpeg5 >> ffmpeg에게 할일을 부여 = 유저의 브라우저에 recording.webm을 초당프레임 60 mp4로 변환하여 그 파일을 인풋(-i는 인풋) >> ffmpeg파일시스템에 output.mp4가 생김
   await ffmpeg.run("-i", "recording.webm", "-r", "60", "output.mp4");
+
+  //썸네일만들기 1 >> -ss는 특정시간대로 이동시켜줌  >> -frames:v ,1 은 이동한시간에서 1장의 스크린샷 찍어줌 >> thumbnail.jpg는 앞에서 찍은 스크린샷을 파일명을 작성 >> 파일시스템의 메모리에 thumbnail.jpg 생성됨
+  await ffmpeg.run("-i", "recording.webm", "-ss", "00:00:01", "-frames:v", "1", "thumbnail.jpg");
+  const thumbFile = ffmpeg.FS("readFile", "thumbnail.jpg");
+  const thumbBlob = new Blob([thumbFile.buffer], { type: "image/jpg" });
+  const thumbUrl = URL.createObjectURL(thumbBlob);
+  const thumbA = document.createElement("a");
+  thumbA.href = thumbUrl;
+  thumbA.download = "MyThumbnail.jpg";
+  document.body.appendChild(thumbA);
+  thumbA.click();
 
   //ffmpeg7 (ffmpeg6은 sever.js에 존재) >> ffmpeg파일시스템에서 output.mp4를 읽어들여 mp4File변수에 할당 (mp4File은 Uin8Array(280649)[0,0,0,32,102..] 이런식으로 생겼고 이것이 브라우저에서 mp4파일을 표현하는 방식이다)
   const mp4File = ffmpeg.FS("readFile", "output.mp4");
@@ -32,9 +46,23 @@ const handleDownload = async () => {
 
   const a = document.createElement("a");
   a.href = mp4Url;
-  a.download = "MyRecoding.mp4"; // a태그를 누르면 이동시켜주는게 아니라 다운로드를 시켜줌
+  a.download = "MyRecoding.mp4"; // a태그를 누르면 이동시켜주는게 아니라 MyRecoding.mp4를 다운로드를 시켜줌
   document.body.appendChild(a);
   a.click();
+
+  // file 다운로드가 끝나면 FS의 파일리스트를 정리해준다
+  ffmpeg.FS("unlink", "recording.webm");
+  ffmpeg.FS("unlink", "output.mp4");
+  ffmpeg.FS("unlink", "thumbnail.jpg");
+
+  // file 다운로드가 끝나면 브라우저 메모리의 URL도 정리해준다
+  URL.revokeObjectURL(mp4Url);
+  URL.revokeObjectURL(thumbUrl);
+  URL.revokeObjectURL(videoFile);
+
+  startRecBtn.disabled = false;
+  startRecBtn.addEventListener("click", handleStartRec);
+  startRecBtn.innerText = "Start Recoding";
 };
 
 const handleStopRec = () => {
@@ -62,6 +90,9 @@ const handleStartRec = () => {
     video.loop = true; /*자동반복 */
     video.play();
   };
+  setTimeout(() => {
+    startRecBtn.click();
+  }, 5000);
 };
 
 // init은 초기설정
@@ -69,7 +100,7 @@ const init = async () => {
   // navigator.mediaDevices.getUserMedia : 유저의 미디어(오디오,비디오)장치에 접근요청을 한다. (유저의 미디어장치정보에서 데이터를 받아오므로 await)
   stream = await navigator.mediaDevices.getUserMedia({
     audio: false,
-    video: { width: 300, height: 200 },
+    video: true,
   });
   video.srcObject = stream; // 불러온 유저의 미디어장치를 video Element에 src로 설정해준다
   video.play(); // video를 재생시킨다.
