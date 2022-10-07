@@ -11,12 +11,14 @@ export const postJoin = async (req, res) => {
   const { name, username, email, password, password2, location } = req.body;
   // 비밀번호 일치확인
   if (password !== password2) {
-    return res.status(400).render("join", { pageTitle: "Join", errorMessage: "Password confirmation does not match." });
+    req.flash("error", "Password confirmation does not match.");
+    return res.status(400).render("join", { pageTitle: "Join" });
   }
   // username,email 중복확인
   const exists = await User.exists({ $or: [{ username }, { email }] });
   if (exists) {
-    return res.status(400).render("join", { pageTitle: "Join", errorMessage: "This username/email is already taken." });
+    req.flash("error", "This username/email is already taken.");
+    return res.status(400).render("join", { pageTitle: "Join" });
   }
   try {
     await User.create({
@@ -26,9 +28,11 @@ export const postJoin = async (req, res) => {
       password,
       location,
     });
+    req.flash("info", "Join is complete.");
     return res.redirect("/login");
   } catch (error) {
-    return res.status(400).render("join", { pageTitle: "Join", errorMessage: "An error has occurred" });
+    req.flash("error", "An error has occurred");
+    return res.status(400).render("join", { pageTitle: "Join" });
   }
 };
 
@@ -40,19 +44,22 @@ export const postLogin = async (req, res) => {
   // username 체크
   const exists = await User.exists({ username });
   if (!exists) {
-    return res.status(400).render("login", { pageTitle: "Login", errorMessage: "An account with this username deos not exists." });
+    req.flash("error", "An account with this username deos not exists.");
+    return res.status(400).render("login", { pageTitle: "Login" });
   }
   // password체크
   const user = await User.findOne({ username, socialLogin: false });
   const ok = await bcrypt.compare(password, user.password); // password를 해싱했을때 user.password가 나오는가 true / false
   if (!ok) {
+    req.flash("error", "Wrong password");
     return res.status(400).render("login", {
       pageTitle: "Login",
-      errorMessage: "Wrong password",
     });
   }
   req.session.loggedIn = true;
   req.session.user = user;
+
+  req.flash("info", "Login is complete.");
   return res.redirect("/");
 };
 
@@ -73,13 +80,15 @@ export const postEdit = async (req, res) => {
   if (changeEmail) {
     const existsEmail = await User.exists({ email });
     if (existsEmail) {
-      return res.status(400).render("edit-profile", { pageTitle: "Edit Profile", errorMessage: "Email already exists" });
+      req.flash("error", "Email already exists");
+      return res.status(400).render("edit-profile", { pageTitle: "Edit Profile" });
     }
   }
   if (changeUsername) {
     const existsUsername = await User.exists({ username });
     if (existsUsername) {
-      return res.status(400).render("edit-profile", { pageTitle: "Edit Profile", errorMessage: "Username already exists" });
+      req.flash("error", "Username already exists");
+      return res.status(400).render("edit-profile", { pageTitle: "Edit Profile" });
     }
   }
   const updatedUser = await User.findByIdAndUpdate(
@@ -94,6 +103,7 @@ export const postEdit = async (req, res) => {
     { new: true } // findByIdAndUpdate는 변경전 Data를 반환하지만, new:ture를 해주면 변경후 Data를 반환해줌
   );
   req.session.user = updatedUser;
+  req.flash("info", "Editing is complete.");
   return res.redirect("/");
 };
 export const logout = (req, res) => {

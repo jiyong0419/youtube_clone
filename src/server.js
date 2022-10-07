@@ -4,7 +4,7 @@ import morgan from "morgan";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middlewares";
-import flash from "express-flash";
+import flash from "express-flash"; //flash-message1 >> npm i express-flash = 사용자에게 flash-message(일회성메시지)를 보여준다
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
@@ -24,10 +24,8 @@ app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(protectedMiddleware);
-app.use(express.urlencoded({ extended: true }));
-// post된 form으로 부터 정보를 읽어들일 준비를 한다. (req.body)
+app.use(express.urlencoded({ extended: true })); // post된 form으로 부터 정보를 읽어들일 준비를 한다. (req.body)
 app.use(express.json());
-
 app.use(
   session({
     secret: process.env.COOKIE_SECRET, // 우리 서버가 제공한 세션이라는 싸인
@@ -43,7 +41,7 @@ app.use((req, res, next) => {
   next();
 }); // ffmpeg6
 
-app.use(flash());
+app.use(flash()); //flash-message2  >> middlewares.js로~
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads")); // upload 요청이 들어오면 upload폴더에 접근시켜줌
 app.use("/assets", express.static("assets")); // assets 요청이 들어오면 assets폴더에 접근시켜줌

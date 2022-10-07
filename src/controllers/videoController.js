@@ -48,6 +48,7 @@ export const postEdit = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
   if (String(video.owner) !== _id) {
+    req.flash("error", "Only this video's owner can edit this video.");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndUpdate(id, {
@@ -55,7 +56,7 @@ export const postEdit = async (req, res) => {
     description,
     hashtags: Video.formatHashtags(hashtags),
   });
-  req.flash("success", "Changes saved.");
+  req.flash("info", "The editing is complete.");
   res.redirect(`/videos/${id}`);
 };
 
@@ -84,11 +85,12 @@ export const postUpload = async (req, res) => {
     const user = await User.findById(_id);
     user.videos.push(newVideo._id);
     user.save();
-    console.log(newVideo);
+    req.flash("info", "The uploading is complete.");
     return res.redirect("/");
   } catch (error) {
     console.log(error);
-    return res.status(400).render("upload", { pageTitle: "Upload Video", errorMessage: "appear error" });
+    req.flash("error", "appear error");
+    return res.status(400).render("upload", { pageTitle: "Upload Video" });
   }
 };
 
@@ -104,11 +106,12 @@ export const deleteVideo = async (req, res) => {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
   if (String(video.owner) !== _id) {
-    req.flash("error", "");
+    req.flash("error", "Only this video's owner can delete this video.");
     return res.status(403).redirect("/");
   }
   console.log(id);
   await Video.findByIdAndDelete(id);
+  req.flash("info", "The deleting is complete.");
   return res.redirect("/");
 };
 
@@ -129,7 +132,6 @@ export const search = async (req, res) => {
 export const registerView = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
-  console.log(id);
   if (!video) {
     return res.sendStatus(404);
   }

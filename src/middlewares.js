@@ -11,7 +11,7 @@ export const protectorMiddleware = (req, res, next) => {
   if (req.session.loggedIn) {
     next();
   } else {
-    req.flash("error", "Login First.");
+    req.flash("error", "Login First."); //flash-message3  >> 첫번째인자 : 메시지타입 , 두번쨰인자 : 메시지   / base.pug로~
     return res.redirect("/login");
   }
 }; //
