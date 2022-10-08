@@ -25,7 +25,7 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(protectedMiddleware);
 app.use(express.urlencoded({ extended: true })); // post된 form으로 부터 정보를 읽어들일 준비를 한다. (req.body)
-app.use(express.json());
+app.use(express.json()); // express가 string을 받아서 다시 JS의것으로 바꿔준다 #16.4
 app.use(
   session({
     secret: process.env.COOKIE_SECRET, // 우리 서버가 제공한 세션이라는 싸인

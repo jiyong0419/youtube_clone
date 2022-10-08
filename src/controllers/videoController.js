@@ -157,5 +157,5 @@ export const createComment = async (req, res) => {
   });
   video.comments.push(comment._id);
   await video.save();
-  return res.send(201).json({ newCommentId: comment._id });
+  return res.send(201).json({ newCommentId: comment._id }); // res.json은 json(객체)를 전송해주고 request를 종료한다, res.render를 사용못하는이유는 res.render는 페이지가 아예 rendering되기때문임. 해당 코드같은경우엔 상태코드와 json만 보내면 됨
 };
