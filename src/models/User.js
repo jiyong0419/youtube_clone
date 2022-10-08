@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   location: String,
   socialLogin: { type: Boolean, default: false },
   avatarUrl: String,
-  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }], //ObjectId 타입은 mongoose에서 제공하는 16진수 24자리다.  ref:"Video"는 이 videos의 요소는 Video Model을 참조한다는 뜻
+  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }], //ObjectId 타입은 mongoose에서 제공하는 16진수 24자리다.  ref:"Video"는 이 videos의 요소는 Video Model을 참조한다는 뜻, video object Id의 reference는 Video에있다
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 }); // Schema는 데이터의 타입과 비고를 작성하는 곳
 

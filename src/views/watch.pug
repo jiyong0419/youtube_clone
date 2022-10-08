@@ -18,12 +18,11 @@ block content
                     i.fas.fa-volume-up  
                 span#fullScreen
                     i.fas.fa-expand  
-    div
-        p=video.description
-        small=video.createdAt
-    div
-        small Uploaded by 
+    div.video__data
+        p.video__title=video.description
+        small.video__owner Uploaded by 
             a(href=`/users/${video.owner._id}`)=video.owner.name
+        small.video__createdAt=video.createdAt
     if String(video.owner._id)===loggedInUser._id
         a(href=`${video._id}/edit`) Edit Video &rarr;
         br
