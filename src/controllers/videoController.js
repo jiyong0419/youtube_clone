@@ -1,4 +1,5 @@
 "use strict";
+import { isGeneratorFunction } from "regenerator-runtime";
 import Comment from "../models/Comment";
 import User from "../models/User";
 import Video from "../models/Video";
@@ -146,6 +147,7 @@ export const createComment = async (req, res) => {
     body: { text },
     params: { id },
   } = req;
+  const loggedInUser = await User.findById(user._id);
   const video = await Video.findById(id);
   if (!video) {
     return res.sendStatus(404);
@@ -153,9 +155,23 @@ export const createComment = async (req, res) => {
   const comment = await Comment.create({
     text,
     owner: user._id,
-    video: video._id,
+    video: id,
   });
   video.comments.push(comment._id);
   await video.save();
-  return res.send(201).json({ newCommentId: comment._id }); // res.json은 json(객체)를 전송해주고 request를 종료한다, res.render를 사용못하는이유는 res.render는 페이지가 아예 rendering되기때문임. 해당 코드같은경우엔 상태코드와 json만 보내면 됨
+  loggedInUser.comments.push(comment._id);
+  await loggedInUser.save();
+  return res.status(201).json({ newCommentId: comment._id }); // res.json은 json(객체)를 전송해주고 request를 종료한다, res.render를 사용못하는이유는 res.render는 페이지가 아예 rendering되기때문임. 해당 코드같은경우엔 상태코드와 json만 보내면 됨
+};
+
+export const deleteComment = async (req, res) => {
+  const { commentId } = req.body;
+  const comment = await Comment.find(commentId);
+  if (!comment) {
+    console.log("Good");
+    return res.sendStatus(404);
+  }
+  await Comment.findByIdAndDelete(commentId);
+  await comment.save();
+  return res.sendStatus(201);
 };

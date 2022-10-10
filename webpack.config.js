@@ -13,14 +13,14 @@ module.exports = {
     commentSection: `${BASE_JS}commentSection.js`,
   },
   // mode: webpack에게 아직 개발중인지, 완성품인지 알려줌
-  mode: "development",
+  // mode: "development",   >> package.json에서 command를 이용하여 실행했다
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/style.css",
     }),
   ],
   // watch : webpack 수정시 자동실행
-  watch: true,
+  // watch: true,  >> package.json에서 command를 이용하여 실행했다
   // output : webpack을 거쳐 변환된 파일을 저장하는것에 대한 설정
   output: {
     // [name]에는 entry의 property를 webpack이 넣어준다
