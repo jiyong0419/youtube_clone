@@ -14,11 +14,14 @@ header
                 li 
                     a(href="/users/logout") Logout
                 li 
-                    a(href=`/users/${loggedInUser._id}`) My Profile
+                    a(href=`/users/${loggedInUser._id}`) 
                         if loggedInUser.avatarUrl === ""
-                            span 😃
+                            span AVATAR
                         else
-                            img.header__avatar(src=loggedInUser.avatarUrl)
+                            if loggedInUser.socialLogin
+                                img.header__avatar(src=loggedInUser.avatarUrl)
+                            else
+                                img.header__avatar(src="/"+loggedInUser.avatarUrl)
             else
                 li 
                     a(href="/login") Login
